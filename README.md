@@ -1,5 +1,7 @@
 # EmailInquire
 
+[![Gem Version](https://badge.fury.io/rb/email_inquire.svg)](https://badge.fury.io/rb/email_inquire)
+
 EmailInquire is a library to validate email for common typos and one-time email provider.
 
 ## Installation
