@@ -1,0 +1,83 @@
+AllCops:
+  Exclude:
+    - 'bin/*'
+  TargetRubyVersion: 2.3
+
+Metrics/AbcSize:
+  Max: 20 # default: 15
+
+Metrics/CyclomaticComplexity:
+  Enabled: false # todo
+  Max: 10 # default: 6
+
+Metrics/LineLength:
+  Enabled: false # todo
+  Max: 100 # default: 80
+
+Metrics/MethodLength:
+  Exclude:
+    - "db/migrate/*"
+  Max: 12 # default: 10
+
+Metrics/PerceivedComplexity:
+  Enabled: false # todo
+  Max: 10 # default: 7
+
+Style/AccessModifierIndentation:
+  EnforcedStyle: indent
+  SupportedStyles:
+    - outdent
+    - indent
+
+Style/AlignHash:
+  EnforcedHashRocketStyle: key
+  EnforcedColonStyle: key
+  EnforcedLastArgumentHashStyle: always_inspect
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines
+
+Style/EmptyLinesAroundModuleBody:
+  EnforcedStyle: empty_lines
+
+Style/FirstParameterIndentation:
+  EnforcedStyle: consistent
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Style/IndentHash:
+  EnforcedStyle: consistent
+
+Style/ModuleFunction:
+  Enabled: false
+
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: no_comma
+
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma
