@@ -5,6 +5,20 @@ module EmailInquire
 
   class Inquirer
 
+    class << self
+
+      private
+
+      def load_data(filename)
+        data = File.read("#{__dir__}/../../data/#{filename}.txt")
+        lines = data.split("\n")
+        lines.reject! { |line| line[0] == "#" }
+
+        lines.to_set
+      end
+
+    end
+
     def initialize(email)
       @email = email.downcase
       response.email = email
@@ -63,51 +77,7 @@ module EmailInquire
       end
     end
 
-    COMMON_DOMAINS = %w(
-      aim.com
-      aliceadsl.fr
-      aol.co.uk
-      aol.com
-      att.net
-      bbox.fr
-      bellsouth.net
-      blueyonder.co.uk
-      btinternet.com
-      charter.net
-      cox.net
-      free.fr
-      gmail.com
-      gmx.fr
-      googlemail.com
-      hotmail.co.uk
-      hotmail.com
-      hotmail.fr
-      icloud.com
-      laposte.net
-      live.co.uk
-      live.com
-      live.fr
-      me.com
-      msn.com
-      neuf.fr
-      ntlworld.com
-      numericable.fr
-      orange.fr
-      outlook.com
-      outlook.fr
-      rocketmail.com
-      sbcglobal.net
-      sfr.fr
-      sky.com
-      talktalk.net
-      verizon.net
-      virginmedia.com
-      wanadoo.fr
-      yahoo.co.uk
-      yahoo.com
-      yahoo.fr
-      ymail.com
-    ).freeze
+    COMMON_DOMAINS = load_data("common_providers").freeze
 
     def validate_common_domains
       return response.valid! if COMMON_DOMAINS.include?(domain)
@@ -137,23 +107,7 @@ module EmailInquire
       end
     end
 
-    VALID_UK_TLD = %w(
-      .ac.uk
-      .co.uk
-      .gov.uk
-      .judiciary.uk
-      .ltd.uk
-      .me.uk
-      .mod.uk
-      .net.uk
-      .nhs.uk
-      .nic.uk
-      .org.uk
-      .parliament.uk
-      .plc.uk
-      .police.uk
-      .sch.uk
-    ).freeze
+    VALID_UK_TLD = load_data("uk_tld").freeze
 
     def validate_uk_tld
       return unless domain.end_with?(".uk")
@@ -171,13 +125,7 @@ module EmailInquire
       response.hint!(domain: new_domain) if new_domain != domain
     end
 
-    UNIQUE_TLD_DOMAINS = %w(
-      free.fr
-      gmail.com
-      laposte.net
-      sfr.fr
-      wanadoo.fr
-    ).freeze
+    UNIQUE_TLD_DOMAINS = load_data("unique_domain_providers").freeze
 
     def validate_domains_with_unique_tld
       base, tld = domain.split(".")
@@ -192,10 +140,7 @@ module EmailInquire
       end
     end
 
-    # https://github.com/wesbos/burner-email-providers
-    ONE_TIME_EMAIL_PROVIDERS = %w(
-      yopmail.com
-    ).freeze
+    ONE_TIME_EMAIL_PROVIDERS = load_data("one_time_email_providers").freeze
 
     def validate_one_time_providers
       response.invalid! if ONE_TIME_EMAIL_PROVIDERS.include?(domain)

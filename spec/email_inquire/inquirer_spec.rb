@@ -2,6 +2,43 @@
 require "spec_helper"
 
 describe EmailInquire::Inquirer do
+  context "considering constants" do
+    domain_regexp = /\A[a-z0-9.-]+[a-z0-9]\.[a-z]+\z/
+    tld_regexp = /\A\.[a-z0-9.]+[a-z0-9]\.[a-z]+\z/
+
+    describe "COMMON_DOMAINS" do
+      it "contains only domains" do
+        described_class::COMMON_DOMAINS.each do |element|
+          expect(element).to match(domain_regexp)
+        end
+      end
+    end
+
+    describe "UNIQUE_TLD_DOMAINS" do
+      it "contains only domains" do
+        described_class::UNIQUE_TLD_DOMAINS.each do |element|
+          expect(element).to match(domain_regexp)
+        end
+      end
+    end
+
+    describe "ONE_TIME_EMAIL_PROVIDERS" do
+      it "contains only domains" do
+        described_class::ONE_TIME_EMAIL_PROVIDERS.each do |element|
+          expect(element).to match(domain_regexp)
+        end
+      end
+    end
+
+    describe "VALID_UK_TLD" do
+      it "contains only TLDs" do
+        described_class::VALID_UK_TLD.each do |element|
+          expect(element).to match(tld_regexp)
+        end
+      end
+    end
+  end
+
   describe "#email" do
     it "returns the provided email" do
       subject = described_class.new("john.doe@example.com")
