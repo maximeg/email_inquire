@@ -48,10 +48,10 @@ Providers with an unique domain:
 - `laposte.fr` => hint `laposte.net`
 - ...
 
-One-time email providers (a.k.a. burners):
+1375 one-time email providers (a.k.a. burners, [source](https://github.com/wesbos/burner-email-providers)):
 
 - `yopmail.com` => invalid
-- more to come for v0.2.0
+- ...
 
 ## Installation
 

@@ -44,7 +44,6 @@ describe "Case: Gmail typos" do
     john.doe@gmal.com
     john.doe@gmaol.com
     john.doe@gmaul.com
-    john.doe@gmial.com
     john.doe@gmil.com
     john.doe@gmsil.com
     john.doe@gmzil.com
@@ -56,6 +55,16 @@ describe "Case: Gmail typos" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
       expect(response.replacement).to eq("john.doe@gmail.com")
+    end
+  end
+
+  # cases handled by other thing
+  %w(
+    john.doe@gmial.com
+  ).each do |kase|
+    it "proposes a hint for #{kase}" do
+      response = EmailInquire.validate(kase)
+      expect(response.status).to eq(:invalid)
     end
   end
 end
