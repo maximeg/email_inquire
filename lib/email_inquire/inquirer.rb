@@ -44,15 +44,17 @@ module EmailInquire
       @response ||= Response.new
     end
 
+    VALIDATORS = [
+      :validate_common_domains,
+      :validate_one_time_providers,
+      :validate_common_domain_mistakes,
+      :validate_uk_tld,
+      :validate_common_tld_mistakes,
+      :validate_domains_with_unique_tld,
+    ].freeze
+
     def validate_typos
-      [
-        :validate_common_domains,
-        :validate_one_time_providers,
-        :validate_common_domain_mistakes,
-        :validate_uk_tld,
-        :validate_common_tld_mistakes,
-        :validate_domains_with_unique_tld,
-      ].each do |validator|
+      VALIDATORS.each do |validator|
         send(validator)
         break if response.valid? || response.invalid?
       end
