@@ -21,7 +21,6 @@ module EmailInquire
 
     def initialize(email)
       @email = email.downcase
-      response.email = email
 
       parse_email
     end
@@ -41,7 +40,9 @@ module EmailInquire
     end
 
     def response
-      @response ||= Response.new
+      @response ||= Response.new.tap do |response|
+        response.email = email
+      end
     end
 
     VALIDATORS = [
