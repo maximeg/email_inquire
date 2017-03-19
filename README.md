@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/email_inquire.svg)](https://badge.fury.io/rb/email_inquire) [![Build Status](https://travis-ci.org/maximeg/email_inquire.svg?branch=master)](https://travis-ci.org/maximeg/email_inquire)
 
-EmailInquire is a library to validate email for common typos and one-time email provider.
+EmailInquire is a library to validate email for common typos and one-time email providers.
 
 ## Why?
 
@@ -18,23 +18,27 @@ Your users :
 
 While we can't do so much for the name part of the email address, for the domain part, we can be smart!
 
+And also, we don't want for users to use one-time email addresses (also called burner email addresses).
+
 ### Supported cases
 
-One char typo for common email providers of France, United Kingdom and USA:
+One char typo for 43 common email providers of France, United Kingdom and USA:
 
 - `gmil.com` => hint `gmail.com`
 - `hitmail.com` => hint `hotmail.com`
 - `outloo.com` => hint `outlook.com`
 - `virinmedia.com` => hint `virginmedia.com`
+- ...
 
-United Kingdom `.xx.uk`:
+United Kingdom `.xx.uk` domains:
 
 - `foo.couk` => hint `foo.co.uk`
 - `fooco.uk` => hint `foo.co.uk`
 - `foo.uk` => hint `foo.co.uk`
 - `foo.judiciary.uk` => ok!
+- ...
 
-Provider with an unique TLD domain:
+Providers with an unique domain:
 
 - `gmail.fr` => hint `gmail.com`
 - `gmail.de` => hint `gmail.com`
@@ -42,11 +46,12 @@ Provider with an unique TLD domain:
 - `free.com` => hint `free.fr`
 - `laposte.com` => hint `laposte.net`
 - `laposte.fr` => hint `laposte.net`
+- ...
 
-One time email providers:
+One-time email providers (a.k.a. burners):
 
 - `yopmail.com` => invalid
-- more to come.
+- more to come for v0.2.0
 
 ## Installation
 
@@ -77,7 +82,7 @@ Methods of `EmailInquire::Response`:
 | `#status` | The status of the validation | `:valid` `:invalid` or `:hint` |
 | `#valid?` | Is the email valid ? | `true` or `false` |
 | `#invalid?` | Is the email invalid ? | `true` or `false` |
-| `#hint?` | Is there a possible mistake and you have to show an hint to the user ? | `true` or `false` |
+| `#hint?` | Is there a possible mistake and you have to show a hint to the user ? | `true` or `false` |
 | `#replacement` | A proposal replacement email address for when status is `:hint` | `"john.doe@gmail.com"` or nil |
 
 ### Examples
@@ -120,7 +125,8 @@ A _"Did you mean xxx@yyy.zzz ?"_ has the following advantages:
 - user is educated;
 - mini whaoo effect;
 
-This _"Did you mean xxx@yyy.zzz ?"_ is better being actionable, and appearing to be so: a click or tap on it should replace the email by the suggestion.
+This _"Did you mean xxx@yyy.zzz ?"_ is better being actionable, and appearing to be so: a click or
+tap on it should replace the email by the suggestion.
 
 ```
   +---------------------------------------+  +---------+
@@ -129,7 +135,7 @@ This _"Did you mean xxx@yyy.zzz ?"_ is better being actionable, and appearing to
     Did you mean john.doe@yahoo.com ?
 ```
 
-Note that you could even have this validation for your Sign In forms...
+Note that you could even have this validation for your Sign In form...
 
 ## Development
 
@@ -139,7 +145,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/email_inquire.
+Bug reports and pull requests are welcome on GitHub at https://github.com/maximeg/email_inquire.
 
 
 ## License
