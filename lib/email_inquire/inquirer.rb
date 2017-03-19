@@ -120,10 +120,9 @@ module EmailInquire
       end
 
       new_domain = domain.dup
+      new_domain.gsub!(/\.[a-z]{2}\.uk\z/, ".co.uk")
       new_domain.gsub!(/(?<!\.)co\.uk\z/, ".co.uk")
-      new_domain.gsub!(/\.c[^o]\.uk\z/, ".co.uk")
-      new_domain.gsub!(/\.[^c]o\.uk\z/, ".co.uk")
-      new_domain.gsub!(/(?<!co)\.uk\z/, ".co.uk")
+      new_domain.gsub!(/(?<!\.co)\.uk\z/, ".co.uk")
 
       response.hint!(domain: new_domain) if new_domain != domain
     end

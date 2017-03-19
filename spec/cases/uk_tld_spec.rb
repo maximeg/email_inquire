@@ -5,6 +5,8 @@ describe "Case: UK TLD" do
   %w(
     john.doe@domain.ci.uk
     john.doe@domain.uk
+    john.doe@domain.xo.uk
+    john.doe@domain.zz.uk
     john.doe@domainco.uk
   ).each do |kase|
     it "proposes a hint for #{kase}" do
