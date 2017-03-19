@@ -4,6 +4,50 @@
 
 EmailInquire is a library to validate email for common typos and one-time email provider.
 
+## Why?
+
+Before an user is an user, it's a visitor. And he must register to be so. What if he makes a typo while
+entering its email address during the registration ?
+If he didn't notice, you just lost him. He won't be able to sign in next time.
+
+Your users :
+
+- may not be as tech saavy as you;
+- may not remember exactly their email address;
+- may make a typo while typing their email address (very very common on a mobile keyboard).
+
+While we can't do so much for the name part of the email address, for the domain part, we can be smart!
+
+### Supported cases
+
+One char typo for common email providers of France, United Kingdom and USA:
+
+- `gmil.com` => hint `gmail.com`
+- `hitmail.com` => hint `hotmail.com`
+- `outloo.com` => hint `outlook.com`
+- `virinmedia.com` => hint `virginmedia.com`
+
+United Kingdom `.xx.uk`:
+
+- `foo.couk` => hint `foo.co.uk`
+- `fooco.uk` => hint `foo.co.uk`
+- `foo.uk` => hint `foo.co.uk`
+- `foo.judiciary.uk` => ok!
+
+Provider with an unique TLD domain:
+
+- `gmail.fr` => hint `gmail.com`
+- `gmail.de` => hint `gmail.com`
+- `google.com` => hint `gmail.com`
+- `free.com` => hint `free.fr`
+- `laposte.com` => hint `laposte.net`
+- `laposte.fr` => hint `laposte.net`
+
+One time email providers:
+
+- `yopmail.com` => invalid
+- more to come.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,7 +66,70 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Use `EmailInquire.validate(email)`, you'll get a `EmailInquire::Response` that represents weither
+or not the email address is valid or may contain a mistake.
+
+Methods of `EmailInquire::Response`:
+
+| Method | Description | Possible values |
+| --- | --- | --- |
+| `#email` | The validated email address | `"john.doe@gnail.com"` |
+| `#status` | The status of the validation | `:valid` `:invalid` or `:hint` |
+| `#valid?` | Is the email valid ? | `true` or `false` |
+| `#invalid?` | Is the email invalid ? | `true` or `false` |
+| `#hint?` | Is there a possible mistake and you have to show an hint to the user ? | `true` or `false` |
+| `#replacement` | A proposal replacement email address for when status is `:hint` | `"john.doe@gmail.com"` or nil |
+
+### Examples
+
+A valid case:
+
+```ruby
+response = EmailInquire.validate("john.doe@gmail.com")
+response.status # :valid
+response.valid? # true
+```
+
+An invalid case:
+
+```ruby
+response = EmailInquire.validate("john.doe@yopmail.com")
+response.status   # :invalid
+response.valid?   # false
+response.invalid? # true
+```
+
+A hint case:
+
+```ruby
+response = EmailInquire.validate("john.doe@gmail.co")
+response.status      # :hint
+response.valid?      # false
+response.hint?       # true
+response.replacement # "john.doe@gmail.com"
+```
+
+### Hint
+
+I think it's important to just offer a hint to the user and to not automatically replace the
+**maybe** faulty email address in the form.
+
+A _"Did you mean xxx@yyy.zzz ?"_ has the following advantages:
+
+- user remains in charge: we could have hinted against a perfectly valid email;
+- user is educated;
+- mini whaoo effect;
+
+This _"Did you mean xxx@yyy.zzz ?"_ is better being actionable, and appearing to be so: a click or tap on it should replace the email by the suggestion.
+
+```
+  +---------------------------------------+  +---------+
+  | john.doe@yaho.com                     |  | Sign Up |
+  +---------------------------------------+  +---------+
+    Did you mean john.doe@yahoo.com ?
+```
+
+Note that you could even have this validation for your Sign In forms...
 
 ## Development
 
