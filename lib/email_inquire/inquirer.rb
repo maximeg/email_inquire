@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require "damerau-levenshtein"
+require "set"
 
 module EmailInquire
 
