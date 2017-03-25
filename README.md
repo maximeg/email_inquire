@@ -12,7 +12,7 @@ If they didn't notice, you just lost them. They won't be able to sign in next ti
 
 Your users :
 
-- may not be as tech saavy as you;
+- may not be as tech savvy as you;
 - may not remember exactly their email address;
 - may make a typo while typing their email address (very very common on a mobile keyboard).
 
