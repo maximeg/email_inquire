@@ -6,7 +6,7 @@ EmailInquire is a library to validate email for common typos and one-time email 
 
 ## Why?
 
-Before an user is an user, they are a visitor. And they must register to be so. What if they makes a typo while
+Before a user is a user, they are a visitor. And they must register to be so. What if they makes a typo while
 entering their email address during the registration ?
 If they didn't notice, you just lost them. They won't be able to sign in next time.
 
