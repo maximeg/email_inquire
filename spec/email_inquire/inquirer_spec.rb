@@ -37,6 +37,14 @@ describe EmailInquire::Inquirer do
         end
       end
     end
+
+    describe "VALID_JP_TLD" do
+      it "contains only TLDs" do
+        described_class::VALID_JP_TLD.each do |element|
+          expect(element).to match(tld_regexp)
+        end
+      end
+    end
   end
 
   describe "#email" do

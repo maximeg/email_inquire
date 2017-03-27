@@ -50,7 +50,7 @@ module EmailInquire
       :validate_common_domains,
       :validate_one_time_providers,
       :validate_common_domain_mistakes,
-      :validate_uk_tld,
+      :validate_cc_tld,
       :validate_common_tld_mistakes,
       :validate_domains_with_unique_tld,
     ].freeze
@@ -96,6 +96,7 @@ module EmailInquire
     end
 
     COMMON_TLD_MISTAKES = {
+      ".cojp" => ".co.jp",
       ".couk" => ".co.uk",
       ".com.com" => ".com",
     }.freeze
@@ -111,21 +112,28 @@ module EmailInquire
       end
     end
 
+    VALID_JP_TLD = load_data("jp_tld").freeze
     VALID_UK_TLD = load_data("uk_tld").freeze
+    VALID_CC_TLDs = [
+      [".jp", ".co.jp", VALID_JP_TLD],
+      [".uk", ".co.uk", VALID_UK_TLD]
+    ].freeze
 
-    def validate_uk_tld
-      return unless domain.end_with?(".uk")
+    def validate_cc_tld
+      VALID_CC_TLDs.each do |tld, sld, valid_tld|
+        next unless domain.end_with?(tld)
 
-      return if VALID_UK_TLD.any? do |reference|
-        domain.end_with?(reference)
+        next if valid_tld.any? do |reference|
+          domain.end_with?(reference)
+        end
+
+        new_domain = domain.dup
+        tld_without_dot = tld[1..-1]
+        new_domain.gsub!(/\.[a-z]{2}\.#{tld_without_dot}\z/, sld)
+        new_domain.gsub!(/(?<!\.)co\.#{tld_without_dot}\z/, sld)
+        new_domain.gsub!(/(?<!\.co)\.#{tld_without_dot}\z/, sld)
+        response.hint!(domain: new_domain) if new_domain != domain
       end
-
-      new_domain = domain.dup
-      new_domain.gsub!(/\.[a-z]{2}\.uk\z/, ".co.uk")
-      new_domain.gsub!(/(?<!\.)co\.uk\z/, ".co.uk")
-      new_domain.gsub!(/(?<!\.co)\.uk\z/, ".co.uk")
-
-      response.hint!(domain: new_domain) if new_domain != domain
     end
 
     UNIQUE_TLD_DOMAINS = load_data("unique_domain_providers").freeze
