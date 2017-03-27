@@ -116,7 +116,7 @@ module EmailInquire
     VALID_UK_TLD = load_data("uk_tld").freeze
     VALID_CC_TLDs = [
       [".jp", ".co.jp", VALID_JP_TLD],
-      [".uk", ".co.uk", VALID_UK_TLD]
+      [".uk", ".co.uk", VALID_UK_TLD],
     ].freeze
 
     def validate_cc_tld
