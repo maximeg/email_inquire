@@ -6,13 +6,13 @@ EmailInquire is a library to validate email for common typos and one-time email 
 
 ## Why?
 
-Before an user is an user, it's a visitor. And he must register to be so. What if he makes a typo while
-entering its email address during the registration ?
-If he didn't notice, you just lost him. He won't be able to sign in next time.
+Before a user is a user, they are a visitor. And they must register to be so. What if they makes a typo while
+entering their email address during the registration ?
+If they didn't notice, you just lost them. They won't be able to sign in next time.
 
 Your users :
 
-- may not be as tech saavy as you;
+- may not be as tech savvy as you;
 - may not remember exactly their email address;
 - may make a typo while typing their email address (very very common on a mobile keyboard).
 
@@ -151,4 +151,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/maxime
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
