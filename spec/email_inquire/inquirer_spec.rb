@@ -4,7 +4,7 @@ require "spec_helper"
 describe EmailInquire::Inquirer do
   context "considering constants" do
     domain_regexp = /\A[a-z0-9.-]+[a-z0-9]\.[a-z]+\z/
-    tld_regexp = /\A\.[a-z0-9.]+[a-z0-9]\.[a-z]+\z/
+    tld_regexp = /\A\.[a-z0-9]+\.[a-z]+\z/
 
     describe "COMMON_DOMAINS" do
       it "contains only domains" do
@@ -41,6 +41,14 @@ describe EmailInquire::Inquirer do
     describe "VALID_JP_TLD" do
       it "contains only TLDs" do
         described_class::VALID_JP_TLD.each do |element|
+          expect(element).to match(tld_regexp)
+        end
+      end
+    end
+
+    describe "VALID_BR_TLD" do
+      it "contains only TLDs" do
+        described_class::VALID_BR_TLD.each do |element|
           expect(element).to match(tld_regexp)
         end
       end

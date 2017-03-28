@@ -96,6 +96,7 @@ module EmailInquire
     end
 
     COMMON_TLD_MISTAKES = {
+      ".combr" => ".com.br",
       ".cojp" => ".co.jp",
       ".couk" => ".co.uk",
       ".com.com" => ".com",
@@ -112,9 +113,11 @@ module EmailInquire
       end
     end
 
+    VALID_BR_TLD = load_data("br_tld").freeze
     VALID_JP_TLD = load_data("jp_tld").freeze
     VALID_UK_TLD = load_data("uk_tld").freeze
     VALID_CC_TLDs = [
+      [".br", ".com.br", VALID_BR_TLD],
       [".jp", ".co.jp", VALID_JP_TLD],
       [".uk", ".co.uk", VALID_UK_TLD],
     ].freeze
@@ -129,9 +132,9 @@ module EmailInquire
 
         new_domain = domain.dup
         tld_without_dot = tld[1..-1]
-        new_domain.gsub!(/\.[a-z]{2}\.#{tld_without_dot}\z/, sld)
-        new_domain.gsub!(/(?<!\.)co\.#{tld_without_dot}\z/, sld)
-        new_domain.gsub!(/(?<!\.co)\.#{tld_without_dot}\z/, sld)
+        new_domain.gsub!(/\.[a-z]{2,3}\.#{tld_without_dot}\z/, sld)
+        new_domain.gsub!(/(?<!\.)com?\.#{tld_without_dot}\z/, sld)
+        new_domain.gsub!(/(?<!\.co|com)\.#{tld_without_dot}\z/, sld)
         response.hint!(domain: new_domain) if new_domain != domain
       end
     end
