@@ -38,6 +38,8 @@ United Kingdom `.xx.uk` domains:
 - `foo.judiciary.uk` => ok!
 - ...
 
+...and same thing with `.co.jp` domains.
+
 Providers with an unique domain:
 
 - `gmail.fr` => hint `gmail.com`
