@@ -31,18 +31,12 @@ describe EmailInquire::Inquirer do
       end
     end
 
-    describe "VALID_UK_TLD" do
+    describe "VALID_CC_TLDS" do
       it "contains only TLDs" do
-        described_class::VALID_UK_TLD.each do |element|
-          expect(element).to match(tld_regexp)
-        end
-      end
-    end
-
-    describe "VALID_JP_TLD" do
-      it "contains only TLDs" do
-        described_class::VALID_JP_TLD.each do |element|
-          expect(element).to match(tld_regexp)
+        described_class::VALID_CC_TLDS.each do |_tld, _sld, valid_tlds|
+          valid_tlds.each do |element|
+            expect(element).to match(tld_regexp)
+          end
         end
       end
     end
