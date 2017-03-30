@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "damerau-levenshtein"
 require "set"
 
@@ -46,14 +47,14 @@ module EmailInquire
       end
     end
 
-    VALIDATORS = [
-      :validate_common_domains,
-      :validate_one_time_providers,
-      :validate_common_domain_mistakes,
-      :validate_cc_tld,
-      :validate_common_tld_mistakes,
-      :validate_domains_with_unique_tld,
-    ].freeze
+    VALIDATORS = %i(
+      validate_common_domains
+      validate_one_time_providers
+      validate_common_domain_mistakes
+      validate_cc_tld
+      validate_common_tld_mistakes
+      validate_domains_with_unique_tld
+    ).freeze
 
     def validate_typos
       VALIDATORS.each do |validator|
