@@ -86,6 +86,21 @@ describe EmailInquire::Inquirer do
     end
 
     context "with an invalid email" do
+      let(:email) { "john.doe@example--foo.com" }
+
+      it "returns an according EmailInquire::Response" do
+        subject = described_class.new(email)
+        expect(subject.validate).to have_attributes({
+          email: email,
+          valid?: false,
+          hint?: false,
+          invalid?: true,
+          replacement: nil,
+        })
+      end
+    end
+
+    context "with a burner email" do
       let(:email) { "john.doe@yopmail.com" }
 
       it "returns an according EmailInquire::Response" do

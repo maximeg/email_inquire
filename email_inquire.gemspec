@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Maxime Garcia"]
   spec.email         = ["maxime.garcia@gmail.com"]
 
-  spec.summary       = "Library to validate email for common typos and one-time email providers"
-  spec.description   = "Library to validate email for common typos and one-time email providers"
+  spec.summary       = "Library to validate email for format, common typos and one-time email providers"
+  spec.description   = "Library to validate email for format, common typos and one-time email providers"
   spec.homepage      = "https://github.com/maximeg/email_inquire"
   spec.license       = "MIT"
 

@@ -39,6 +39,12 @@ module EmailInquire
     ).freeze
 
     def validate
+      email_validator = EmailValidator.new(email)
+      unless email_validator.valid?
+        response.invalid!
+        return response
+      end
+
       VALIDATORS.each do |validator|
         send(validator)
         break if response.valid? || response.invalid?
