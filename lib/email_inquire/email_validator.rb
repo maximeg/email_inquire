@@ -2,6 +2,9 @@
 
 module EmailInquire
 
+  # Relevant literature:
+  # http://emailregex.com/email-validation-summary/
+  # http://www.regular-expressions.info/email.html
   class EmailValidator
 
     def initialize(email)
