@@ -3,17 +3,17 @@
 require "spec_helper"
 
 describe "Case: Gmail typos" do
-  %w(
+  %w[
     john.doe@gmail.com
     john.doe@googlemail.com
-  ).each do |kase|
+  ].each do |kase|
     it "considers valid #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:valid)
     end
   end
 
-  %w(
+  %w[
     john.doe@email.com
     john.doe@fmail.com
     john.doe@g.mail.com
@@ -51,7 +51,7 @@ describe "Case: Gmail typos" do
     john.doe@gnail.com
     john.doe@google.fr
     john.doe@hmail.com
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
@@ -60,9 +60,9 @@ describe "Case: Gmail typos" do
   end
 
   # cases handled by other thing
-  %w(
+  %w[
     john.doe@gmial.com
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:invalid)

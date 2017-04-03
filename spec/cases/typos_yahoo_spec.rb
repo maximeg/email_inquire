@@ -3,21 +3,21 @@
 require "spec_helper"
 
 describe "Case: Yahoo typos" do
-  %w(
+  %w[
     john.doe@yahoo.co.uk
     john.doe@yahoo.com
     john.doe@yahoo.fr
     john.doe@ymail.com
-  ).each do |kase|
+  ].each do |kase|
     it "considers valid #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:valid)
     end
   end
 
-  %w(
+  %w[
     john.doe@yahooo.com
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
@@ -25,7 +25,7 @@ describe "Case: Yahoo typos" do
     end
   end
 
-  %w(
+  %w[
     john.doe@tahoo.fr
     john.doe@uahoo.fr
     john.doe@yaboo.fr
@@ -41,7 +41,7 @@ describe "Case: Yahoo typos" do
     john.doe@yajoo.fr
     john.doe@yaoo.fr
     john.doe@yhaoo.fr
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
@@ -49,10 +49,10 @@ describe "Case: Yahoo typos" do
     end
   end
 
-  %w(
+  %w[
     john.doe@yahoo.uk
     john.doe@yhoo.co.uk
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)

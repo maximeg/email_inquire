@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe "Case: Hotmail typos" do
-  %w(
+  %w[
     john.doe@hitmail.com
     john.doe@homail.com
     john.doe@homtail.com
@@ -21,7 +21,7 @@ describe "Case: Hotmail typos" do
     john.doe@hotmil.com
     john.doe@jotmail.com
     john.doe@otmail.com
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
@@ -29,7 +29,7 @@ describe "Case: Hotmail typos" do
     end
   end
 
-  %w(
+  %w[
     john.doe@botmail.fr
     john.doe@gotmail.fr
     john.doe@hitmail.fr
@@ -60,7 +60,7 @@ describe "Case: Hotmail typos" do
     john.doe@hotmzil.fr
     john.doe@htmail.fr
     john.doe@jotmail.fr
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)

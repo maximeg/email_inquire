@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe "Case: Wanadoo typos" do
-  %w(
+  %w[
     john.doe@wanado.fr
     john.doe@wanadoi.fr
     john.doe@wanadoo.com
@@ -13,7 +13,7 @@ describe "Case: Wanadoo typos" do
     john.doe@wanadop.fr
     john.doe@wanasoo.fr
     john.doe@wandoo.fr
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)

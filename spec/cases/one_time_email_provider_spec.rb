@@ -3,13 +3,13 @@
 require "spec_helper"
 
 describe "Case: One-time email providers" do
-  %w(
+  %w[
     john.doe@0-mail.com
     john.doe@disposemail.com
     john.doe@mailinator.com
     john.doe@yopmail.com
     john.doe@yopmail.fr
-  ).each do |kase|
+  ].each do |kase|
     it "detects #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:invalid)

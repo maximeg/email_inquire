@@ -13,9 +13,9 @@ describe "Case: Other typos" do
     end
   end
 
-  %w(
+  %w[
     john.doe@aliceafsl.fr
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
@@ -23,9 +23,9 @@ describe "Case: Other typos" do
     end
   end
 
-  %w(
+  %w[
     john.doe@al.com
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
@@ -33,10 +33,10 @@ describe "Case: Other typos" do
     end
   end
 
-  %w(
+  %w[
     john.doe@ail.com
     john.doe@ain.com
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
@@ -44,9 +44,9 @@ describe "Case: Other typos" do
     end
   end
 
-  %w(
+  %w[
     john.doe@nulericable.fr
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
@@ -54,13 +54,13 @@ describe "Case: Other typos" do
     end
   end
 
-  %w(
+  %w[
     john.doe@sf.fr
     john.doe@sfe.fr
     john.doe@sfr.com
     john.doe@sfr.fe
     john.doe@sft.fr
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)

@@ -3,13 +3,13 @@
 require "spec_helper"
 
 describe "Case: UK TLD" do
-  %w(
+  %w[
     john.doe@domain.ci.uk
     john.doe@domain.uk
     john.doe@domain.xo.uk
     john.doe@domain.zz.uk
     john.doe@domainco.uk
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
@@ -18,7 +18,7 @@ describe "Case: UK TLD" do
   end
 
   # https://en.wikipedia.org/wiki/.uk
-  %w(
+  %w[
     john.doe@domain.ac.uk
     john.doe@domain.co.uk
     john.doe@domain.gov.uk
@@ -34,7 +34,7 @@ describe "Case: UK TLD" do
     john.doe@domain.plc.uk
     john.doe@domain.police.uk
     john.doe@domain.sch.uk
-  ).each do |kase|
+  ].each do |kase|
     it "does not propose a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:valid)

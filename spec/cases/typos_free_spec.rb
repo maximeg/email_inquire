@@ -3,12 +3,12 @@
 require "spec_helper"
 
 describe "Case: Free typos" do
-  %w(
+  %w[
     john.doe@free.com
     john.doe@free.fe
     john.doe@frer.fr
     john.doe@gree.fr
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)

@@ -3,14 +3,14 @@
 require "spec_helper"
 
 describe "Case: BR TLD" do
-  %w(
+  %w[
     john.doe@domain.br
     john.doe@domain.ci.br
     john.doe@domain.combr
     john.doe@domaincom.br
     john.doe@domain.xo.br
     john.doe@domain.zz.br
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
@@ -20,7 +20,7 @@ describe "Case: BR TLD" do
 
   # https://en.wikipedia.org/wiki/.br
   # https://registro.br/dominio/categoria.html
-  %w(
+  %w[
     john.doe@domain.adm.br
     john.doe@domain.adv.br
     john.doe@domain.agr.br
@@ -93,7 +93,7 @@ describe "Case: BR TLD" do
     john.doe@domain.vlog.br
     john.doe@domain.wiki.br
     john.doe@domain.zlg.br
-  ).each do |kase|
+  ].each do |kase|
     it "does not propose a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:valid)

@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe "Case: Orange typos" do
-  %w(
+  %w[
     john.doe@irange.fr
     john.doe@oange.fr
     john.doe@oeange.fr
@@ -16,7 +16,7 @@ describe "Case: Orange typos" do
     john.doe@orangr.fr
     john.doe@ornge.fr
     john.doe@prange.fr
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)

@@ -29,14 +29,14 @@ module EmailInquire
 
     attr_reader :domain, :email, :name
 
-    VALIDATORS = %i(
+    VALIDATORS = %i[
       validate_common_domains
       validate_one_time_providers
       validate_common_domain_mistakes
       validate_cc_tld
       validate_common_tld_mistakes
       validate_domains_with_unique_tld
-    ).freeze
+    ].freeze
 
     def validate
       email_validator = EmailValidator.new(email)

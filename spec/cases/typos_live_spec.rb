@@ -3,12 +3,12 @@
 require "spec_helper"
 
 describe "Case: Live typos" do
-  %w(
+  %w[
     john.doe@liv.com
     john.doe@live.co
     john.doe@livr.com
     john.doe@windowslive.com
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
@@ -16,13 +16,13 @@ describe "Case: Live typos" do
     end
   end
 
-  %w(
+  %w[
     john.doe@liv.fr
     john.doe@live.fe
     john.doe@live.ff
     john.doe@live.ft
     john.doe@livr.fr
-  ).each do |kase|
+  ].each do |kase|
     it "proposes a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)

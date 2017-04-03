@@ -3,9 +3,9 @@
 require "spec_helper"
 
 describe "Case: Not overly helpful" do
-  %w(
+  %w[
     john.doe@domain.ca
-  ).each do |kase|
+  ].each do |kase|
     it "does not propose a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:valid)
