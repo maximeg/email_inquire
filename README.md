@@ -51,7 +51,7 @@ ccTLD specificity, like United Kingdom `.xx.uk` domains:
 - `foo.judiciary.uk` => ok!
 - ...
 
-...and same thing with `.co.jp` domains.
+...and same thing with `.co.jp` & `.com.br` domains.
 
 Providers with an unique domain:
 
