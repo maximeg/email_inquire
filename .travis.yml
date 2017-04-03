@@ -7,3 +7,4 @@ rvm:
   - 2.4.1
 before_install: gem install bundler -v 1.14.6
 bundler_args: --without local
+script: bundle exec rake ci
