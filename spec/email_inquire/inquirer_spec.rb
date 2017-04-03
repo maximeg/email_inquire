@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 describe EmailInquire::Inquirer do
@@ -30,26 +31,12 @@ describe EmailInquire::Inquirer do
       end
     end
 
-    describe "VALID_UK_TLD" do
+    describe "VALID_CC_TLDS" do
       it "contains only TLDs" do
-        described_class::VALID_UK_TLD.each do |element|
-          expect(element).to match(tld_regexp)
-        end
-      end
-    end
-
-    describe "VALID_JP_TLD" do
-      it "contains only TLDs" do
-        described_class::VALID_JP_TLD.each do |element|
-          expect(element).to match(tld_regexp)
-        end
-      end
-    end
-
-    describe "VALID_BR_TLD" do
-      it "contains only TLDs" do
-        described_class::VALID_BR_TLD.each do |element|
-          expect(element).to match(tld_regexp)
+        described_class::VALID_CC_TLDS.each do |_tld, _sld, valid_tlds|
+          valid_tlds.each do |element|
+            expect(element).to match(tld_regexp)
+          end
         end
       end
     end
@@ -99,6 +86,21 @@ describe EmailInquire::Inquirer do
     end
 
     context "with an invalid email" do
+      let(:email) { "john.doe@example--foo.com" }
+
+      it "returns an according EmailInquire::Response" do
+        subject = described_class.new(email)
+        expect(subject.validate).to have_attributes({
+          email: email,
+          valid?: false,
+          hint?: false,
+          invalid?: true,
+          replacement: nil,
+        })
+      end
+    end
+
+    context "with a burner email" do
       let(:email) { "john.doe@yopmail.com" }
 
       it "returns an according EmailInquire::Response" do

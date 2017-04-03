@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "damerau-levenshtein"
 require "set"
 
@@ -28,8 +29,29 @@ module EmailInquire
 
     attr_reader :domain, :email, :name
 
+    VALIDATORS = %i(
+      validate_common_domains
+      validate_one_time_providers
+      validate_common_domain_mistakes
+      validate_cc_tld
+      validate_common_tld_mistakes
+      validate_domains_with_unique_tld
+    ).freeze
+
     def validate
-      validate_typos
+      email_validator = EmailValidator.new(email)
+      unless email_validator.valid?
+        response.invalid!
+        return response
+      end
+
+      VALIDATORS.each do |validator|
+        send(validator)
+        break if response.valid? || response.invalid?
+      end
+
+      # default
+      response.valid! unless response.status?
 
       response
     end
@@ -44,25 +66,6 @@ module EmailInquire
       @response ||= Response.new.tap do |response|
         response.email = email
       end
-    end
-
-    VALIDATORS = [
-      :validate_common_domains,
-      :validate_one_time_providers,
-      :validate_common_domain_mistakes,
-      :validate_cc_tld,
-      :validate_common_tld_mistakes,
-      :validate_domains_with_unique_tld,
-    ].freeze
-
-    def validate_typos
-      VALIDATORS.each do |validator|
-        send(validator)
-        break if response.valid? || response.invalid?
-      end
-
-      # default
-      response.valid! unless response.status?
     end
 
     COMMON_DOMAIN_MISTAKES = {
@@ -113,28 +116,26 @@ module EmailInquire
       end
     end
 
-    VALID_BR_TLD = load_data("br_tld").freeze
-    VALID_JP_TLD = load_data("jp_tld").freeze
-    VALID_UK_TLD = load_data("uk_tld").freeze
-    VALID_CC_TLDs = [
-      [".br", ".com.br", VALID_BR_TLD],
-      [".jp", ".co.jp", VALID_JP_TLD],
-      [".uk", ".co.uk", VALID_UK_TLD],
+    VALID_CC_TLDS = [
+      [".jp", ".co.jp", load_data("jp_tld").freeze],
+      [".uk", ".co.uk", load_data("uk_tld").freeze],
+      [".br", ".com.br", load_data("br_tld").freeze],
     ].freeze
 
     def validate_cc_tld
-      VALID_CC_TLDs.each do |tld, sld, valid_tld|
+      VALID_CC_TLDS.each do |tld, sld, valid_tlds|
         next unless domain.end_with?(tld)
 
-        next if valid_tld.any? do |reference|
+        next if valid_tlds.any? do |reference|
           domain.end_with?(reference)
         end
 
+        _, com, tld_without_dot = sld.split(".")
+
         new_domain = domain.dup
-        tld_without_dot = tld[1..-1]
-        new_domain.gsub!(/\.[a-z]{2,3}\.#{tld_without_dot}\z/, sld)
-        new_domain.gsub!(/(?<!\.)com?\.#{tld_without_dot}\z/, sld)
-        new_domain.gsub!(/(?<!\.co|com)\.#{tld_without_dot}\z/, sld)
+        new_domain.gsub!(/\.[a-z]{2,#{com.length}}\.#{tld_without_dot}\z/, sld)
+        new_domain.gsub!(/(?<!\.)#{com}\.#{tld_without_dot}\z/, sld)
+        new_domain.gsub!(/(?<!\.#{com})\.#{tld_without_dot}\z/, sld)
         response.hint!(domain: new_domain) if new_domain != domain
       end
     end

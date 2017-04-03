@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/email_inquire.svg)](https://badge.fury.io/rb/email_inquire) [![Build Status](https://travis-ci.org/maximeg/email_inquire.svg?branch=master)](https://travis-ci.org/maximeg/email_inquire) [![Code Climate](https://codeclimate.com/github/maximeg/email_inquire/badges/gpa.svg)](https://codeclimate.com/github/maximeg/email_inquire)
 
-EmailInquire is a library to validate email for common typos and one-time email providers.
+EmailInquire is a library to validate email for format, common typos and one-time email providers.
 
 ## Why?
 
@@ -22,7 +22,20 @@ And also, we don't want for users to use one-time email addresses (also called b
 
 ### Supported cases
 
-One char typo for 43 common email providers of France, United Kingdom and USA:
+Format error. This doesn't strictly follow RFC 5322, it aims at validating email that will be
+deliverable on Internet. It also takes into account length of email, name part and domain part as
+per SMTP specification.
+
+- `foo@example..com` => invalid
+- `foo@example..foo.com` => invalid
+- `foo@example--foo.com` => invalid
+- `foo@localhost` => invalid
+- `foo@123.123.123.123` => invalid
+- `secrétariat@example.com` => invalid
+- `foo+test@example.com` => valid
+- ...
+
+One char typo for 43 common email providers (worldwide and from France, United Kingdom and USA):
 
 - `gmil.com` => hint `gmail.com`
 - `hitmail.com` => hint `hotmail.com`
@@ -30,13 +43,15 @@ One char typo for 43 common email providers of France, United Kingdom and USA:
 - `virinmedia.com` => hint `virginmedia.com`
 - ...
 
-United Kingdom `.xx.uk` domains:
+ccTLD specificity, like United Kingdom `.xx.uk` domains:
 
 - `foo.couk` => hint `foo.co.uk`
 - `fooco.uk` => hint `foo.co.uk`
 - `foo.uk` => hint `foo.co.uk`
 - `foo.judiciary.uk` => ok!
 - ...
+
+...and same thing with `.co.jp` domains.
 
 Providers with an unique domain:
 
