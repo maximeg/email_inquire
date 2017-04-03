@@ -8,3 +8,5 @@ rvm:
 before_install: gem install bundler -v 1.14.6
 bundler_args: --without local
 script: bundle exec rake ci
+before_script:
+  - cp -f .rspec.travis .rspec
