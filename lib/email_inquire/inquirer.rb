@@ -99,6 +99,7 @@ module EmailInquire
     end
 
     COMMON_TLD_MISTAKES = {
+      ".combr" => ".com.br",
       ".cojp" => ".co.jp",
       ".couk" => ".co.uk",
       ".com.com" => ".com",
@@ -118,6 +119,7 @@ module EmailInquire
     VALID_CC_TLDS = [
       [".jp", ".co.jp", load_data("jp_tld").freeze],
       [".uk", ".co.uk", load_data("uk_tld").freeze],
+      [".br", ".com.br", load_data("br_tld").freeze],
     ].freeze
 
     def validate_cc_tld
