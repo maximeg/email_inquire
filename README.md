@@ -4,6 +4,8 @@
 
 EmailInquire is a library to validate email for format, common typos and one-time email providers.
 
+[Changelog](https://github.com/maximeg/email_inquire/blob/master/CHANGELOG.md)
+
 ## Why?
 
 Before a user is a user, they are a visitor. And they must register to be so. What if they makes a typo while
