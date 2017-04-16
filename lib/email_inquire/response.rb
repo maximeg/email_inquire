@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module EmailInquire
-
   class Response
 
     attr_accessor :email, :replacement, :status
@@ -38,5 +37,4 @@ module EmailInquire
     end
 
   end
-
 end

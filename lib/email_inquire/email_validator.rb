@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module EmailInquire
-
   # Relevant literature:
   # http://emailregex.com/email-validation-summary/
   # http://www.regular-expressions.info/email.html
@@ -64,5 +63,4 @@ module EmailInquire
     end
 
   end
-
 end

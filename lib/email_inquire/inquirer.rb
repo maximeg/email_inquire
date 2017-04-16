@@ -4,7 +4,6 @@ require "damerau-levenshtein"
 require "set"
 
 module EmailInquire
-
   class Inquirer
 
     class << self
@@ -63,9 +62,10 @@ module EmailInquire
     end
 
     def response
-      @response ||= Response.new.tap do |response|
-        response.email = email
-      end
+      @response ||=
+        Response.new.tap do |response|
+          response.email = email
+        end
     end
 
     COMMON_DOMAIN_MISTAKES = {
@@ -162,5 +162,4 @@ module EmailInquire
     end
 
   end
-
 end
