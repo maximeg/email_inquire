@@ -77,6 +77,34 @@ Style/IndentArray:
 Style/IndentHash:
   EnforcedStyle: consistent
 
+Style/MethodCallWithArgsParentheses:
+  Enabled: true # false by default
+  Exclude:
+    - "config/routes.rb"
+    - "config/routes/*"
+    - "Gemfile"
+    - "**/*.gemspec"
+  IgnoreMacros: true
+  IgnoredMethods:
+    - include
+    - load
+    - print
+    - puts
+    - raise
+    - require
+    # rake
+    - desc
+    - namespace
+    - task
+    # swagger
+    - key
+    - operation
+    - property
+    - response
+    - security_definition
+    - swagger_path
+    - swagger_schema
+
 Style/ModuleFunction:
   Enabled: false
 
@@ -107,3 +135,6 @@ Style/TrailingCommaInArguments:
 
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: comma
+
+Style/VariableNumber:
+  EnforcedStyle: snake_case

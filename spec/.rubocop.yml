@@ -12,3 +12,35 @@ Style/Documentation:
 Style/GlobalVars:
   AllowedVariables:
     - $logger
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: true # false by default
+  Exclude:
+    - "factories/**/*"
+  IgnoreMacros: true
+  IgnoredMethods:
+    - include
+    - load
+    - print
+    - puts
+    - raise
+    - require
+    # rspec
+    - after
+    - and
+    - around
+    - before
+    - context
+    - describe
+    - include_context
+    - include_example
+    - include_examples
+    - it
+    - it_behaves_like
+    - not_to
+    - shared_context
+    - shared_examples
+    - shared_examples_for
+    - specify
+    - to
+    - to_not
