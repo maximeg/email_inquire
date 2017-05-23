@@ -1,5 +1,5 @@
 before_install:
-  - gem install bundler -v 1.14.6
+  - gem install bundler -v 1.15.0
 before_script:
   - cp -f .rspec.travis .rspec
 bundler_args: --without local
