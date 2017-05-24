@@ -3,6 +3,60 @@ AllCops:
     - 'bin/*'
   TargetRubyVersion: 2.3
 
+Layout/AccessModifierIndentation:
+  EnforcedStyle: indent
+  SupportedStyles:
+    - outdent
+    - indent
+
+Layout/AlignHash:
+  EnforcedHashRocketStyle: key
+  EnforcedColonStyle: key
+  EnforcedLastArgumentHashStyle: always_inspect
+
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines_except_namespace
+
+Layout/EmptyLinesAroundModuleBody:
+  EnforcedStyle: empty_lines_except_namespace
+
+Layout/ExtraSpacing:
+  AllowForAlignment: false
+
+Layout/FirstArrayElementLineBreak:
+  Enabled: true
+
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: true
+
+Layout/FirstParameterIndentation:
+  EnforcedStyle: consistent
+
+Layout/IndentArray:
+  EnforcedStyle: consistent
+
+Layout/IndentHash:
+  EnforcedStyle: consistent
+
+Layout/MultilineAssignmentLayout:
+  Enabled: true
+  EnforcedStyle: new_line
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Layout/SpaceBeforeFirstArg:
+  AllowForAlignment: false
+
 Metrics/AbcSize:
   Max: 20 # default: 15
 
@@ -27,55 +81,14 @@ Metrics/PerceivedComplexity:
   Enabled: false # todo
   Max: 10 # default: 7
 
-Style/AccessModifierIndentation:
-  EnforcedStyle: indent
-  SupportedStyles:
-    - outdent
-    - indent
-
-Style/AlignHash:
-  EnforcedHashRocketStyle: key
-  EnforcedColonStyle: key
-  EnforcedLastArgumentHashStyle: always_inspect
-
-Style/AlignParameters:
-  EnforcedStyle: with_fixed_indentation
-
 Style/BracesAroundHashParameters:
   Enabled: false
 
 Style/Documentation:
   Enabled: false
 
-Style/EmptyLinesAroundClassBody:
-  EnforcedStyle: empty_lines_except_namespace
-
-Style/EmptyLinesAroundModuleBody:
-  EnforcedStyle: empty_lines_except_namespace
-
-Style/ExtraSpacing:
-  AllowForAlignment: false
-
-Style/FirstArrayElementLineBreak:
-  Enabled: true
-
-Style/FirstHashElementLineBreak:
-  Enabled: true
-
-Style/FirstMethodArgumentLineBreak:
-  Enabled: true
-
-Style/FirstParameterIndentation:
-  EnforcedStyle: consistent
-
 Style/FrozenStringLiteralComment:
   Enabled: true
-
-Style/IndentArray:
-  EnforcedStyle: consistent
-
-Style/IndentHash:
-  EnforcedStyle: consistent
 
 Style/MethodCallWithArgsParentheses:
   Enabled: true # false by default
@@ -108,21 +121,8 @@ Style/MethodCallWithArgsParentheses:
 Style/ModuleFunction:
   Enabled: false
 
-Style/MultilineAssignmentLayout:
-  Enabled: true
-  EnforcedStyle: new_line
-
-Style/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
-
-Style/MultilineOperationIndentation:
-  EnforcedStyle: indented
-
 Style/SignalException:
   EnforcedStyle: only_raise
-
-Style/SpaceBeforeFirstArg:
-  AllowForAlignment: false
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
