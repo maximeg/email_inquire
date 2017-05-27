@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Case: JP TLD" do
+RSpec.describe "Case: JP TLD" do
   %w[
     john.doe@domain.ci.jp
     john.doe@domain.jp

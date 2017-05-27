@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe EmailInquire::EmailValidator do
+RSpec.describe EmailInquire::EmailValidator do
   describe "#valid?" do
     it "returns true for a valid address" do
       subject = described_class.new("john.doe@example.com")

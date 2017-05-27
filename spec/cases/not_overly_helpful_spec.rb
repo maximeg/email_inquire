@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Case: Not overly helpful" do
+RSpec.describe "Case: Not overly helpful" do
   %w[
     john.doe@domain.ca
   ].each do |kase|

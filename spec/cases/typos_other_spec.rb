@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Case: Other typos" do
+RSpec.describe "Case: Other typos" do
   {
     "john.doe@domain.com.com" => "john.doe@domain.com",
   }.each do |kase, hint|

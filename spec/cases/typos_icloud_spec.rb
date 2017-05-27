@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Case: iCloud typos" do
+RSpec.describe "Case: iCloud typos" do
   # nice to have: john.doe@icould.com
   %w[
     john.doe@cloud.com

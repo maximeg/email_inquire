@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Case: Live typos" do
+RSpec.describe "Case: Live typos" do
   %w[
     john.doe@liv.com
     john.doe@live.co

@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Case: Free typos" do
+RSpec.describe "Case: Free typos" do
   %w[
     john.doe@free.com
     john.doe@free.fe

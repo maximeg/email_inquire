@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "EmailInquire::VERSION" do
+RSpec.describe "EmailInquire::VERSION" do
   subject { EmailInquire::VERSION }
 
   it "exists" do

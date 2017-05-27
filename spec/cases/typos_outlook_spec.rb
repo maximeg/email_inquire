@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Case: Outlook typos" do
+RSpec.describe "Case: Outlook typos" do
   %w[
     john.doe@outloo.com
     john.doe@outloock.com

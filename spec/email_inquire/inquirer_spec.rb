@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe EmailInquire::Inquirer do
+RSpec.describe EmailInquire::Inquirer do
   context "considering constants" do
     domain_regexp = /\A[a-z0-9.-]+[a-z0-9]\.[a-z]+\z/
     tld_regexp = /\A\.[a-z0-9]+\.[a-z]+\z/

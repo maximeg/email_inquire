@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Case: One-time email providers" do
+RSpec.describe "Case: One-time email providers" do
   %w[
     john.doe@0-mail.com
     john.doe@disposemail.com

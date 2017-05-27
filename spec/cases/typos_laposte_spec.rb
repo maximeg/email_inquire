@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Case: La Poste typos" do
+RSpec.describe "Case: La Poste typos" do
   %w[
     john.doe@lapost.net
     john.doe@laposte.com
