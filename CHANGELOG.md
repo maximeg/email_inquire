@@ -8,11 +8,11 @@
 
 **Added:**
 
-- Known invalid domains (such as example.com) ([maximeg](https://github.com/maximeg)
+- Known invalid domains (such as example.com) ([maximeg](https://github.com/maximeg))
 
 **Changed:**
 
-- Update one-time providers list to 3030 domains ([maximeg](https://github.com/maximeg)
+- Update one-time providers list to 3030 domains ([maximeg](https://github.com/maximeg))
 
 **Dev:**
 
