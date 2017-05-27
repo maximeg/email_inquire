@@ -11,6 +11,11 @@
 
 - Update one-time providers list to 3030 domains ([maximeg](https://github.com/maximeg)
 
+**Dev:**
+
+- Quality: Update Rubocop to 0.49.0 ([maximeg](https://github.com/maximeg))
+- Spec: Update RSpec to 3.6.0 ([maximeg](https://github.com/maximeg))
+
 ## [v0.6.0](https://github.com/maximeg/email_inquire/tree/v0.6.0) (2017-04-16)
 [Full Changelog](https://github.com/maximeg/email_inquire/compare/v0.5.0...v0.6.0)
 
