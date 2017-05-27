@@ -42,7 +42,6 @@ RSpec.describe "Case: Gmail typos" do
     john.doe@gmail.xom
     john.doe@gmaim.com
     john.doe@gmaio.com
-    john.doe@gmal.com
     john.doe@gmaol.com
     john.doe@gmaul.com
     john.doe@gmil.com
@@ -59,11 +58,12 @@ RSpec.describe "Case: Gmail typos" do
     end
   end
 
-  # cases handled by other thing
+  # domains which are known burners
   %w[
+    john.doe@gmal.com
     john.doe@gmial.com
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "sets #{kase} as invalid" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:invalid)
     end

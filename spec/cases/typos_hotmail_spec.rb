@@ -10,7 +10,6 @@ RSpec.describe "Case: Hotmail typos" do
     john.doe@hormail.com
     john.doe@hotail.com
     john.doe@hotamil.com
-    john.doe@hotmai.com
     john.doe@hotmaik.com
     john.doe@hotmail.col
     john.doe@hotmail.con
@@ -65,6 +64,16 @@ RSpec.describe "Case: Hotmail typos" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:hint)
       expect(response.replacement).to eq("john.doe@hotmail.fr")
+    end
+  end
+
+  # domains which are known burners
+  %w[
+    john.doe@hotmai.com
+  ].each do |kase|
+    it "sets #{kase} as invalid" do
+      response = EmailInquire.validate(kase)
+      expect(response.status).to eq(:invalid)
     end
   end
 end
