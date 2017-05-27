@@ -28,13 +28,13 @@ Format error. This doesn't strictly follow RFC 5322, it aims at validating email
 deliverable on Internet. It also takes into account length of email, name part and domain part as
 per SMTP specification.
 
-- `foo@example..com` => invalid
-- `foo@example..foo.com` => invalid
-- `foo@example--foo.com` => invalid
+- `foo@domain..com` => invalid
+- `foo@my..domain.com` => invalid
+- `foo@my--domain.com` => invalid
 - `foo@localhost` => invalid
 - `foo@123.123.123.123` => invalid
-- `secrétariat@example.com` => invalid
-- `foo+test@example.com` => valid
+- `secrétariat@domain.com` => invalid
+- `foo+test@domain.com` => valid
 - ...
 
 One char typo for 43 common email providers (worldwide and from France, United Kingdom and USA):

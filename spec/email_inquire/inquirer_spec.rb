@@ -44,19 +44,19 @@ RSpec.describe EmailInquire::Inquirer do
 
   describe "#email" do
     it "returns the provided email" do
-      subject = described_class.new("john.doe@example.com")
-      expect(subject.email).to eq("john.doe@example.com")
+      subject = described_class.new("john.doe@domain.com")
+      expect(subject.email).to eq("john.doe@domain.com")
     end
   end
 
   describe "#validate" do
     it "returns a EmailInquire::Response" do
-      subject = described_class.new("john.doe@example.com")
+      subject = described_class.new("john.doe@domain.com")
       expect(subject.validate).to be_a(EmailInquire::Response)
     end
 
     context "with a valid email" do
-      let(:email) { "john.doe@example.com" }
+      let(:email) { "john.doe@domain.com" }
 
       it "returns an according EmailInquire::Response" do
         subject = described_class.new(email)
@@ -86,7 +86,7 @@ RSpec.describe EmailInquire::Inquirer do
     end
 
     context "with an invalid email" do
-      let(:email) { "john.doe@example--foo.com" }
+      let(:email) { "john.doe@my--domain.com" }
 
       it "returns an according EmailInquire::Response" do
         subject = described_class.new(email)

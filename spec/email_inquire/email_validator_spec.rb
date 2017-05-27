@@ -5,17 +5,17 @@ require "spec_helper"
 RSpec.describe EmailInquire::EmailValidator do
   describe "#valid?" do
     it "returns true for a valid address" do
-      subject = described_class.new("john.doe@example.com")
+      subject = described_class.new("john.doe@domain.com")
       expect(subject.valid?).to eq(true)
     end
 
     it "returns false for an address without @" do
-      subject = described_class.new("john.doeexample.com")
+      subject = described_class.new("john.doedomain.com")
       expect(subject.valid?).to eq(false)
     end
 
     it "returns false for an address with several @" do
-      subject = described_class.new("john@doe@example.com")
+      subject = described_class.new("john@doe@domain.com")
       expect(subject.valid?).to eq(false)
     end
 
@@ -31,37 +31,37 @@ RSpec.describe EmailInquire::EmailValidator do
 
     context "considering name part" do
       it "returns false for address without name part" do
-        subject = described_class.new("@example.com")
+        subject = described_class.new("@domain.com")
         expect(subject.valid?).to eq(false)
       end
 
       it "returns true for name containing dots" do
-        subject = described_class.new("john.doe.foo@example.com")
+        subject = described_class.new("john.doe.foo@domain.com")
         expect(subject.valid?).to eq(true)
       end
 
       it "returns true for name containing a plus" do
-        subject = described_class.new("john.doe+test@example.com")
+        subject = described_class.new("john.doe+test@domain.com")
         expect(subject.valid?).to eq(true)
       end
 
       it "returns true for name containing a dash" do
-        subject = described_class.new("john-doe@example.com")
+        subject = described_class.new("john-doe@domain.com")
         expect(subject.valid?).to eq(true)
       end
 
       it "returns true for name containing an underscore" do
-        subject = described_class.new("john_doe@example.com")
+        subject = described_class.new("john_doe@domain.com")
         expect(subject.valid?).to eq(true)
       end
 
       it "returns true for name containing a percent" do
-        subject = described_class.new("john.doe%test@example.com")
+        subject = described_class.new("john.doe%test@domain.com")
         expect(subject.valid?).to eq(true)
       end
 
       it "returns false for name containing non ascii char" do
-        subject = described_class.new("john.dôe@example.com")
+        subject = described_class.new("john.dôe@domain.com")
         expect(subject.valid?).to eq(false)
       end
     end
@@ -73,12 +73,15 @@ RSpec.describe EmailInquire::EmailValidator do
       end
 
       it "returns false for domain containing non ascii char" do
-        subject = described_class.new("john.doe@exâmple.com")
+        subject = described_class.new("john.doe@dômain.com")
         expect(subject.valid?).to eq(false)
       end
 
       it "returns false for no fully qualified domain" do
-        subject = described_class.new("john.doe@example")
+        subject = described_class.new("john.doe@domain")
+        expect(subject.valid?).to eq(false)
+
+        subject = described_class.new("john.doe@my-domain")
         expect(subject.valid?).to eq(false)
       end
 
@@ -93,64 +96,64 @@ RSpec.describe EmailInquire::EmailValidator do
       end
 
       it "returns true for domain having one part of 63 chars" do
-        subject = described_class.new("john.doe@example.#{"a" * 63}.com")
+        subject = described_class.new("john.doe@domain.#{"a" * 63}.com")
         expect(subject.valid?).to eq(true)
       end
 
       it "returns false for domain having one part of 64 chars" do
-        subject = described_class.new("john.doe@example.#{"a" * 64}.com")
+        subject = described_class.new("john.doe@domain.#{"a" * 64}.com")
         expect(subject.valid?).to eq(false)
       end
 
       context "considering dashes" do
         it "returns true for domain with a dash" do
-          subject = described_class.new("john.doe@example-foo.com")
+          subject = described_class.new("john.doe@my-domain.com")
           expect(subject.valid?).to eq(true)
         end
 
         it "returns false for domain with successive dashes" do
-          subject = described_class.new("john.doe@example--foo.com")
+          subject = described_class.new("john.doe@my--domain.com")
           expect(subject.valid?).to eq(false)
 
-          subject = described_class.new("john.doe@example---foo.com")
+          subject = described_class.new("john.doe@my---domain.com")
           expect(subject.valid?).to eq(false)
         end
 
         it "returns false for domain ending with a dash" do
-          subject = described_class.new("john.doe@example-.com")
+          subject = described_class.new("john.doe@domain-.com")
           expect(subject.valid?).to eq(false)
         end
 
         it "returns false for domain starting with a dash" do
-          subject = described_class.new("john.doe@-example.com")
+          subject = described_class.new("john.doe@-domain.com")
           expect(subject.valid?).to eq(false)
         end
       end
 
       context "considering dots" do
         it "returns true for domain with a dot" do
-          subject = described_class.new("john.doe@example.foo.com")
+          subject = described_class.new("john.doe@my.domain.com")
           expect(subject.valid?).to eq(true)
         end
 
         it "returns false for domain with successive dots" do
-          subject = described_class.new("john.doe@example..foo.com")
+          subject = described_class.new("john.doe@my..domain.com")
           expect(subject.valid?).to eq(false)
 
-          subject = described_class.new("john.doe@example..com")
+          subject = described_class.new("john.doe@domain..com")
           expect(subject.valid?).to eq(false)
 
-          subject = described_class.new("john.doe@example...com")
+          subject = described_class.new("john.doe@domain...com")
           expect(subject.valid?).to eq(false)
         end
 
         it "returns false for domain ending with a dot" do
-          subject = described_class.new("john.doe@example.com.")
+          subject = described_class.new("john.doe@domain.com.")
           expect(subject.valid?).to eq(false)
         end
 
         it "returns false for domain starting with a dot" do
-          subject = described_class.new("john.doe@.example.com")
+          subject = described_class.new("john.doe@.domain.com")
           expect(subject.valid?).to eq(false)
         end
       end

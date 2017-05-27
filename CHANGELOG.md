@@ -3,6 +3,10 @@
 ## [Unreleased]
 [Full Changelog](https://github.com/maximeg/email_inquire/compare/v0.6.0...master)
 
+**Added:**
+
+- Known invalid domains (such as example.com) ([maximeg](https://github.com/maximeg)
+
 **Changed:**
 
 - Update one-time providers list to 3030 domains ([maximeg](https://github.com/maximeg)

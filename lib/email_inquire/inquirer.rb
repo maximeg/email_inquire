@@ -31,6 +31,7 @@ module EmailInquire
     VALIDATORS = %i[
       validate_common_domains
       validate_one_time_providers
+      validate_known_invalid_domains
       validate_common_domain_mistakes
       validate_cc_tld
       validate_common_tld_mistakes
@@ -159,6 +160,12 @@ module EmailInquire
 
     def validate_one_time_providers
       response.invalid! if ONE_TIME_EMAIL_PROVIDERS.include?(domain)
+    end
+
+    KNOWN_INVALID_DOMAINS = load_data("known_invalid_domains").freeze
+
+    def validate_known_invalid_domains
+      response.invalid! if KNOWN_INVALID_DOMAINS.include?(domain)
     end
 
   end
