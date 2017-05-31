@@ -1,6 +1,6 @@
 # EmailInquire
 
-[![Gem Version](https://badge.fury.io/rb/email_inquire.svg)](https://badge.fury.io/rb/email_inquire) [![Build Status](https://travis-ci.org/maximeg/email_inquire.svg?branch=master)](https://travis-ci.org/maximeg/email_inquire) [![Dependency Status](https://gemnasium.com/badges/github.com/maximeg/email_inquire.svg)](https://gemnasium.com/github.com/maximeg/email_inquire) [![Code Climate](https://codeclimate.com/github/maximeg/email_inquire/badges/gpa.svg)](https://codeclimate.com/github/maximeg/email_inquire)
+[![Gem Version](https://badge.fury.io/rb/email_inquire.svg)](https://badge.fury.io/rb/email_inquire) [![Build Status](https://travis-ci.org/maximeg/email_inquire.svg?branch=master)](https://travis-ci.org/maximeg/email_inquire) [![codecov](https://codecov.io/gh/maximeg/email_inquire/branch/master/graph/badge.svg)](https://codecov.io/gh/maximeg/email_inquire) [![Dependency Status](https://gemnasium.com/badges/github.com/maximeg/email_inquire.svg)](https://gemnasium.com/github.com/maximeg/email_inquire) [![Code Climate](https://codeclimate.com/github/maximeg/email_inquire/badges/gpa.svg)](https://codeclimate.com/github/maximeg/email_inquire)
 
 EmailInquire is a library to validate email for format, common typos and one-time email providers.
 
