@@ -6,6 +6,7 @@
 **Changed:**
 
 - Update minimum Ruby version to 2.3.0 ([maximeg](https://github.com/maximeg))
+- Update one-time providers list to 3764 domains ([maximeg](https://github.com/maximeg))
 
 **Dev:**
 
