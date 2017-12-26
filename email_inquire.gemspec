@@ -1,4 +1,3 @@
-# coding: utf-8
 # frozen_string_literal: true
 
 lib = File.expand_path("../lib", __FILE__)
@@ -12,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email = ["maxime.garcia@gmail.com"]
 
   spec.summary = "Library to validate email for format, common typos and one-time email providers"
-  spec.description = "Library to validate email for format, common typos and one-time email providers"
+  spec.description = spec.summary
   spec.homepage = "https://github.com/maximeg/email_inquire"
   spec.license = "MIT"
 
@@ -26,10 +25,10 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "damerau-levenshtein", "~> 1.2"
+  spec.add_runtime_dependency("damerau-levenshtein", "~> 1.2")
 
-  spec.add_development_dependency "bundler", "~> 1.15"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.6.0"
-  spec.add_development_dependency "rubocop", "0.49.1"
+  spec.add_development_dependency("bundler", "~> 1.15")
+  spec.add_development_dependency("rake", "~> 10.0")
+  spec.add_development_dependency("rspec", "~> 3.6.0")
+  spec.add_development_dependency("rubocop", "0.52.0")
 end

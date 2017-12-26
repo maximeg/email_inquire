@@ -54,80 +54,112 @@ Layout/MultilineMethodCallIndentation:
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 
+Layout/SpaceAroundOperators:
+  AllowForAlignment: false
+
 Layout/SpaceBeforeFirstArg:
   AllowForAlignment: false
 
+Lint/EndAlignment:
+  AutoCorrect: true
+
+Lint/RedundantWithIndex:
+  Enabled: true
+
+Lint/UnusedMethodArgument:
+  AllowUnusedKeywordArguments: true
+  IgnoreEmptyMethods: true
+
 Metrics/AbcSize:
+  Enabled: false # todo
   Max: 20 # default: 15
 
-Metrics/ClassLength:
+Metrics/BlockLength:
   Enabled: false # todo
-  Max: 100 # default: 100
 
 Metrics/CyclomaticComplexity:
   Enabled: false # todo
   Max: 10 # default: 6
 
 Metrics/LineLength:
-  Enabled: false # todo
+  Enabled: true
   Max: 100 # default: 80
+  IgnoredPatterns:
+    - "^ *#" # comments
 
 Metrics/MethodLength:
-  Exclude:
-    - "db/migrate/*"
+  Enabled: false # todo
   Max: 12 # default: 10
 
 Metrics/PerceivedComplexity:
   Enabled: false # todo
   Max: 10 # default: 7
 
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
+Performance/HashEachMethods:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/AndOr:
+  Enabled: true
+  EnforcedStyle: conditionals
+
 Style/BracesAroundHashParameters:
   Enabled: false
+
+Style/Dir:
+  Enabled: true
 
 Style/Documentation:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
-  Enabled: true
+  Enabled: false # we'll do later
+
+Style/Lambda:
+  Enabled: false
+
 
 Style/MethodCallWithArgsParentheses:
   Enabled: true # false by default
   Exclude:
-    - "config/routes.rb"
-    - "config/routes/*"
     - "Gemfile"
-    - "**/*.gemspec"
   IgnoreMacros: true
   IgnoredMethods:
     - include
     - load
     - print
+    - private
+    - protected
+    - public
     - puts
     - raise
     - require
+    - require_relative
     # rake
     - desc
     - namespace
     - task
-    # swagger
-    - key
-    - operation
-    - property
-    - response
-    - security_definition
-    - swagger_path
-    - swagger_schema
 
 Style/ModuleFunction:
   Enabled: false
+
+Style/ReturnNil:
+  Enabled: true
 
 Style/SignalException:
   EnforcedStyle: only_raise
 
 Style/StringLiterals:
+  Enabled: true
   EnforcedStyle: double_quotes
 
 Style/StringLiteralsInInterpolation:
+  Enabled: true
   EnforcedStyle: double_quotes
 
 Style/TrailingCommaInArguments:
@@ -136,5 +168,72 @@ Style/TrailingCommaInArguments:
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: comma
 
-Style/VariableNumber:
-  EnforcedStyle: snake_case
+#
+# Temporary disabled
+#
+
+Layout/EmptyLinesAroundArguments:
+  Enabled: false # buggy yet
+
+Lint/IneffectiveAccessModifier:
+  Enabled: false
+
+Lint/MissingCopEnableDirective:
+  Enabled: false
+
+Lint/RescueException:
+  Enabled: false
+
+Lint/ShadowedException:
+  Enabled: false
+
+Metrics/BlockNesting:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false
+
+Security/Eval:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false
+
+Style/DateTime:
+  Enabled: false
+
+Style/ExtendSelf:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false # issue with strftime
+
+Style/GuardClause:
+  Enabled: false
+
+Style/MixinUsage:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/SafeNavigation:
+  Enabled: false
+
+Style/StructInheritance:
+  Enabled: false
