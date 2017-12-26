@@ -3,6 +3,10 @@
 ## [Unreleased]
 [Full Changelog](https://github.com/maximeg/email_inquire/compare/v0.7.0...master)
 
+**Added:**
+
+- Custom invalid domains ([maximeg](https://github.com/maximeg))
+
 **Changed:**
 
 - Update minimum Ruby version to 2.3.0 ([maximeg](https://github.com/maximeg))

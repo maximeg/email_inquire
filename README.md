@@ -20,7 +20,8 @@ Your users :
 
 While we can't do so much for the name part of the email address, for the domain part, we can be smart!
 
-And also, we don't want for users to use one-time email addresses (also called burner email addresses).
+And also, we don't want for users to use one-time email addresses (also called burner or disposable
+email addresses).
 
 ### Supported cases
 
@@ -65,10 +66,20 @@ Providers with an unique domain:
 - `laposte.fr` => hint `laposte.net`
 - ...
 
-3764 one-time email providers (a.k.a. burners, [source](https://github.com/wesbos/burner-email-providers)):
+3764 one-time email providers (a.k.a. burners, or disposable email
+[source](https://github.com/wesbos/burner-email-providers)):
 
 - `yopmail.com` => invalid
 - ...
+
+Custom invalid domains: Add your own invalid domains:
+
+```ruby
+# in config/initializers/email_inquire.rb
+EmailInquire.custom_invalid_domains << "bad-domain.com"
+```
+
+- `bad-domain.com` => invalid
 
 ## Installation
 
@@ -129,6 +140,21 @@ response.status      # :hint
 response.valid?      # false
 response.hint?       # true
 response.replacement # "john.doe@gmail.com"
+```
+
+A custom invalid case:
+
+```ruby
+# in config/initializers/email_inquire.rb
+EmailInquire.custom_invalid_domains << "bad-domain.com"
+```
+
+then:
+```ruby
+response = EmailInquire.validate("john.doe@bad-domain.com")
+response.status   # :invalid
+response.valid?   # false
+response.invalid? # true
 ```
 
 ### Hint

@@ -32,6 +32,7 @@ module EmailInquire
       validate_common_domains
       validate_one_time_providers
       validate_known_invalid_domains
+      validate_custom_invalid_domains
       validate_common_domain_mistakes
       validate_cc_tld
       validate_common_tld_mistakes
@@ -166,6 +167,10 @@ module EmailInquire
 
     def validate_known_invalid_domains
       response.invalid! if KNOWN_INVALID_DOMAINS.include?(domain)
+    end
+
+    def validate_custom_invalid_domains
+      response.invalid! if EmailInquire.custom_invalid_domains.include?(domain)
     end
 
   end

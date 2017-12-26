@@ -12,4 +12,24 @@ module EmailInquire
     inquirer.validate
   end
 
+  def self.custom_invalid_domains=(domains)
+    @@custom_invalid_domains =
+      case domains
+      when Set
+        domains
+      when Array
+        domains.to_set
+      when nil
+        Set.new
+      else
+        raise ArgumentError, "Unsupported type in `custom_invalid_domains=`"
+      end
+  end
+
+  def self.custom_invalid_domains
+    @@custom_invalid_domains ||= Set.new
+
+    @@custom_invalid_domains
+  end
+
 end
