@@ -6,7 +6,6 @@ RSpec.describe "Case: La Poste typos" do
   %w[
     john.doe@lapost.net
     john.doe@laposte.com
-    john.doe@laposte.fr
     john.doe@laposte.ne
     john.doe@laposte.ner
     john.doe@lapostr.net

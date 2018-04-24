@@ -18,6 +18,7 @@ hotmail.com
 hotmail.fr
 icloud.com
 laposte.net
+laposte.fr
 live.co.uk
 live.com
 live.fr
