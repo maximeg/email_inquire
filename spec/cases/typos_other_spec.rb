@@ -57,7 +57,6 @@ RSpec.describe "Case: Other typos" do
   %w[
     john.doe@sf.fr
     john.doe@sfe.fr
-    john.doe@sfr.com
     john.doe@sfr.fe
     john.doe@sft.fr
   ].each do |kase|
