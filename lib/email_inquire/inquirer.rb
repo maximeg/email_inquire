@@ -29,6 +29,7 @@ module EmailInquire
     attr_reader :domain, :email, :name
 
     VALIDATORS = %i[
+      validate_custom_valid_domains
       validate_common_domains
       validate_one_time_providers
       validate_known_invalid_domains
@@ -171,6 +172,10 @@ module EmailInquire
 
     def validate_custom_invalid_domains
       response.invalid! if EmailInquire.custom_invalid_domains.include?(domain)
+    end
+
+    def validate_custom_valid_domains
+      response.valid! if EmailInquire.custom_valid_domains.include?(domain)
     end
 
   end

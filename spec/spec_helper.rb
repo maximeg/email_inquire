@@ -26,5 +26,6 @@ RSpec.configure do |config|
 
   config.before(:each) do
     EmailInquire.custom_invalid_domains = nil
+    EmailInquire.custom_valid_domains = nil
   end
 end
