@@ -3,6 +3,10 @@
 ## [Unreleased]
 [Full Changelog](https://github.com/maximeg/email_inquire/compare/v0.8.0...master)
 
+**Dev:**
+
+- Update Ruby versions for CI (and add 2.6.0) ([maximeg](https://github.com/maximeg))
+
 ## [v0.8.0](https://github.com/maximeg/email_inquire/tree/v0.8.0) (2017-12-26)
 [Full Changelog](https://github.com/maximeg/email_inquire/compare/v0.7.0...v0.8.0)
 
