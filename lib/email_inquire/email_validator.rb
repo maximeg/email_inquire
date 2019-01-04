@@ -15,6 +15,7 @@ module EmailInquire
     def valid?
       return false unless email.count("@") == 1
       return false if email.length > 255
+
       name, domain = email.split("@", 2)
 
       name_valid?(name) && domain_valid?(domain)
@@ -38,7 +39,7 @@ module EmailInquire
       ){1,8}
       [a-z]{2,63}
       \z
-    /x
+    /x.freeze
 
     def domain_valid?(domain)
       return false if domain == ""
@@ -52,7 +53,7 @@ module EmailInquire
       [a-z0-9]
       [a-z0-9._%+-]{0,63}
       \z
-    /x
+    /x.freeze
 
     def name_valid?(name)
       return false if name == ""
