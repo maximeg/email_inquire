@@ -157,6 +157,27 @@ response.valid?   # false
 response.invalid? # true
 ```
 
+A custom valid case:
+
+```ruby
+# in config/initializers/email_inquire.rb
+EmailInquire.custom_valid_domains << "example.com" # would be otherwise invalid
+EmailInquire.custom_valid_domains << "sfr.com" # would be otherwise hinted to "sfr.fr"
+```
+
+then:
+```ruby
+response = EmailInquire.validate("john.doe@example.com")
+response.status   # :valid
+response.valid?   # true
+response.invalid? # false
+
+response = EmailInquire.validate("john.doe@sfr.com")
+response.status   # :valid
+response.valid?   # true
+response.invalid? # false
+```
+
 ### Hint
 
 I think it's important to just offer a hint to the user and to not automatically replace the

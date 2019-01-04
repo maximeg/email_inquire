@@ -3,6 +3,10 @@
 ## [Unreleased]
 [Full Changelog](https://github.com/maximeg/email_inquire/compare/v0.8.0...master)
 
+**Added:**
+
+- Custom valid domains ([maximeg](https://github.com/maximeg))
+
 **Dev:**
 
 - Update Ruby versions for CI (and add 2.6.0) ([maximeg](https://github.com/maximeg))
