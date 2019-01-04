@@ -7,6 +7,10 @@
 
 - Custom valid domains ([maximeg](https://github.com/maximeg))
 
+**Changed:**
+
+- Update one-time providers list to 3981 domains ([maximeg](https://github.com/maximeg))
+
 **Dev:**
 
 - Update Ruby versions for CI (and add 2.6.0) ([maximeg](https://github.com/maximeg))
