@@ -1,7 +1,10 @@
 # Change Log
 
 ## [Unreleased]
-[Full Changelog](https://github.com/maximeg/email_inquire/compare/v0.8.0...master)
+[Full Changelog](https://github.com/maximeg/email_inquire/compare/v0.9.0...master)
+
+## [v0.9.0](https://github.com/maximeg/email_inquire/tree/v0.9.0) (2019-01-04)
+[Full Changelog](https://github.com/maximeg/email_inquire/compare/v0.8.0...v0.9.0)
 
 **Added:**
 
