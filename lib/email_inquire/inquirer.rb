@@ -65,10 +65,7 @@ module EmailInquire
     end
 
     def response
-      @response ||=
-        Response.new.tap do |response|
-          response.email = email
-        end
+      @response ||= Response.new(email: email)
     end
 
     COMMON_DOMAIN_MISTAKES = {

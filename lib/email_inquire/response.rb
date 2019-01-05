@@ -3,17 +3,22 @@
 module EmailInquire
   class Response
 
-    attr_accessor :email, :replacement, :status
+    attr_reader :email
+    attr_accessor :replacement, :status
 
-    def hint!(domain: nil)
+    def initialize(email:)
+      @email = email
+    end
+
+    def hint!(domain:)
       self.status = :hint
 
       old_name, _old_domain = email.split("@")
-      self.replacement = "#{old_name}@#{domain}" if domain
+      self.replacement = "#{old_name}@#{domain}"
     end
 
     def hint?
-      status == :hint
+      status.equal?(:hint)
     end
 
     def invalid!
@@ -21,7 +26,7 @@ module EmailInquire
     end
 
     def invalid?
-      status == :invalid
+      status.equal?(:invalid)
     end
 
     def status?
@@ -33,7 +38,7 @@ module EmailInquire
     end
 
     def valid?
-      status == :valid
+      status.equal?(:valid)
     end
 
   end
