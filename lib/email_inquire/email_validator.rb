@@ -7,13 +7,13 @@ module EmailInquire
   class EmailValidator
 
     def initialize(email)
-      @email = email.downcase
+      @email = email&.downcase
     end
 
     attr_reader :email
 
     def valid?
-      return false unless email.count("@") == 1
+      return false unless email
       return false if email.length > 255
 
       name, domain = email.split("@", 2)
@@ -42,7 +42,6 @@ module EmailInquire
     /x.freeze
 
     def domain_valid?(domain)
-      return false if domain == ""
       return false unless domain =~ DOMAIN_REGEXP
 
       true
@@ -56,8 +55,6 @@ module EmailInquire
     /x.freeze
 
     def name_valid?(name)
-      return false if name == ""
-      return false if name.length > 64
       return false unless name =~ NAME_REGEXP
 
       true
