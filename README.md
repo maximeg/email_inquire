@@ -23,9 +23,14 @@ While we can't do so much for the name part of the email address, for the domain
 And also, we don't want for users to use one-time email addresses (also called burner or disposable
 email addresses).
 
-### Supported cases
+## Supported cases
 
-Format error. This doesn't strictly follow RFC 5322, it aims at validating email that will be
+All supported cases are based on a static validation.
+The gem does not check (yet) for domain existence (DNS) and prior delivery (MX entries on DNS).
+
+### Email format
+
+This doesn't strictly follow RFC 5322, it aims at validating email that will be
 deliverable on Internet. It also takes into account length of email, name part and domain part as
 per SMTP specification.
 
@@ -38,6 +43,8 @@ per SMTP specification.
 - `foo+test@domain.com` => valid
 - ...
 
+### Typos
+
 One char typo for 43 common email providers (worldwide and from France, United Kingdom and USA):
 
 - `gmil.com` => hint `gmail.com`
@@ -45,6 +52,8 @@ One char typo for 43 common email providers (worldwide and from France, United K
 - `outloo.com` => hint `outlook.com`
 - `virinmedia.com` => hint `virginmedia.com`
 - ...
+
+### ccTLD typos
 
 ccTLD specificity, like United Kingdom `.xx.uk` domains:
 
@@ -56,6 +65,8 @@ ccTLD specificity, like United Kingdom `.xx.uk` domains:
 
 ...and same thing with `.co.jp` & `.com.br` domains.
 
+### Email provider
+
 Providers with an unique domain:
 
 - `gmail.fr` => hint `gmail.com`
@@ -66,13 +77,21 @@ Providers with an unique domain:
 - `laposte.fr` => hint `laposte.net`
 - ...
 
-3981 one-time email providers (a.k.a. burners, or disposable email
-[source](https://github.com/wesbos/burner-email-providers)):
+### Burners
+
+3981 one-time email providers a.k.a. burners, or disposable email
+([source](https://github.com/wesbos/burner-email-providers)):
 
 - `yopmail.com` => invalid
 - ...
 
-Custom invalid domains: Add your own invalid domains:
+### Known invalid domains
+
+- `example.com` => invalid
+
+### Custom invalid domains
+
+Add your own invalid domains:
 
 ```ruby
 # in config/initializers/email_inquire.rb
@@ -80,6 +99,18 @@ EmailInquire.custom_invalid_domains << "bad-domain.com"
 ```
 
 - `bad-domain.com` => invalid
+
+### Custom valid domains
+
+Take precedence over all the above rules and make any domain in the list valid, and non hintable.
+Add your own valid domains:
+
+```ruby
+# in config/initializers/email_inquire.rb
+EmailInquire.custom_valid_domains << "good-domain.com"
+```
+
+- `good-domain.com` => valid
 
 ## Installation
 
