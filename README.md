@@ -232,6 +232,27 @@ tap on it should replace the email by the suggestion.
 
 Note that you could even have this validation for your Sign In form...
 
+## FAQ
+
+### Why does a perfectly valid corporate domain is hinted ?
+
+There are a few cases of corporate domains that will be hinted to the related public provider domain:
+
+- `google.com` => hint `gmail.com`
+- `laposte.fr` => hint `laposte.net`
+- `sfr.com` => hint `sfr.fr`
+
+This is intended. Taking `google.com` (corp) vs. `gmail.com` (public provider):
+
+- there are far more people with a `gmail.com` address rather than people with `google.com` address;
+- employees of Google are well aware of the difference between `google.com` (their employee address)
+  and `gmail.com` (the public email provider offered by their company)
+  and will not be mistaken by a hint;
+- non-tech savvy people are not, and have in mind "my email address is google",
+  so not hinting to `gmail.com` would let a lot of actual errors pass.
+
+If you do not want this, add the affected domains to `EmailInquire.custom_valid_domains`.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
