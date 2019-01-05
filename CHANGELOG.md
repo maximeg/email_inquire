@@ -8,7 +8,7 @@
 
 **Added:**
 
-- Custom valid domains ([maximeg](https://github.com/maximeg))
+- Custom valid domains ([maximeg](https://github.com/maximeg), [kwoodard22](https://github.com/kwoodard22))
 
 **Changed:**
 
