@@ -8,6 +8,29 @@ RSpec.describe EmailInquire do
       it "returns a set" do
         expect(described_class.custom_invalid_domains).to be_a(Set)
       end
+
+      it "returns the same set" do
+        expect(described_class.custom_invalid_domains)
+          .to equal(described_class.custom_invalid_domains)
+      end
+    end
+
+    context "when touched" do
+      let(:set) { Set.new(%w[domain1.com domain2.com]) }
+
+      before do
+        described_class.custom_invalid_domains = set
+      end
+
+      it "returns a set" do
+        expect(described_class.custom_invalid_domains).to be_a(Set)
+      end
+
+      it "returns the same set" do
+        expect(described_class.custom_invalid_domains).to equal(set)
+        expect(described_class.custom_invalid_domains)
+          .to equal(described_class.custom_invalid_domains)
+      end
     end
   end
 
@@ -44,6 +67,27 @@ RSpec.describe EmailInquire do
       it "returns a set" do
         expect(described_class.custom_valid_domains).to be_a(Set)
       end
+
+      it "returns the same set" do
+        expect(described_class.custom_valid_domains).to equal(described_class.custom_valid_domains)
+      end
+    end
+
+    context "when touched" do
+      let(:set) { Set.new(%w[domain1.com domain2.com]) }
+
+      before do
+        described_class.custom_valid_domains = set
+      end
+
+      it "returns a set" do
+        expect(described_class.custom_valid_domains).to be_a(Set)
+      end
+
+      it "returns the same set" do
+        expect(described_class.custom_valid_domains).to equal(set)
+        expect(described_class.custom_valid_domains).to equal(described_class.custom_valid_domains)
+      end
     end
   end
 
@@ -72,6 +116,15 @@ RSpec.describe EmailInquire do
       }.to raise_error(ArgumentError, "Unsupported type in `custom_valid_domains=`")
 
       expect(described_class.custom_valid_domains).to eq(Set.new)
+    end
+  end
+
+  describe ".validate" do
+    it "works" do
+      response = described_class.validate("john.doe@domain.com")
+
+      expect(response).to be_a(EmailInquire::Response)
+      expect(response).to be_valid
     end
   end
 end
