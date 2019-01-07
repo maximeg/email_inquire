@@ -29,12 +29,10 @@ module EmailInquire
   def self.custom_valid_domains=(domains)
     @custom_valid_domains =
       case domains
-      when Set
+      when Set, nil
         domains
       when Array
         domains.to_set
-      when nil
-        nil
       else
         raise ArgumentError, "Unsupported type in `custom_valid_domains=`"
       end
