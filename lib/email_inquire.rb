@@ -11,7 +11,7 @@ module EmailInquire
   end
 
   def self.custom_invalid_domains=(domains)
-    @@custom_invalid_domains =
+    @custom_invalid_domains =
       case domains
       when Set, nil
         domains
@@ -23,11 +23,11 @@ module EmailInquire
   end
 
   def self.custom_invalid_domains
-    @@custom_invalid_domains ||= Set.new
+    @custom_invalid_domains ||= Set.new
   end
 
   def self.custom_valid_domains=(domains)
-    @@custom_valid_domains =
+    @custom_valid_domains =
       case domains
       when Set
         domains
@@ -41,7 +41,7 @@ module EmailInquire
   end
 
   def self.custom_valid_domains
-    @@custom_valid_domains ||= Set.new
+    @custom_valid_domains ||= Set.new
   end
 
 end

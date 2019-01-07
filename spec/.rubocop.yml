@@ -38,6 +38,7 @@ Style/MethodCallWithArgsParentheses:
     - it
     - it_behaves_like
     - not_to
+    - or
     - shared_context
     - shared_examples
     - shared_examples_for
