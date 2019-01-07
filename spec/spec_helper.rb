@@ -24,6 +24,11 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  config.filter_run_when_matching(:focus) unless ENV["CI"] == "true"
+
+  config.order = :random
+  Kernel.srand(config.seed)
+
   config.before(:each) do
     EmailInquire.custom_invalid_domains = nil
     EmailInquire.custom_valid_domains = nil
