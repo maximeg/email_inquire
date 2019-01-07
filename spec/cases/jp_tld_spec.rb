@@ -5,7 +5,6 @@ require "spec_helper"
 RSpec.describe "Case: JP TLD" do
   %w[
     john.doe@domain.ci.jp
-    john.doe@domain.jp
     john.doe@domain.xo.jp
     john.doe@domain.zz.jp
     john.doe@domainco.jp
@@ -15,6 +14,12 @@ RSpec.describe "Case: JP TLD" do
       expect(response.status).to eq(:hint)
       expect(response.replacement).to eq("john.doe@domain.co.jp")
     end
+  end
+
+  # Registration of .jp has now opened
+  it "does not propose a hint for john.doe@domain.jp as domain.jp may exists" do
+    response = EmailInquire.validate("john.doe@domain.jp")
+    expect(response.status).to eq(:valid)
   end
 
   # https://en.wikipedia.org/wiki/.jp

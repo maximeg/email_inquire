@@ -3,42 +3,9 @@
 require "spec_helper"
 
 RSpec.describe EmailInquire::Inquirer do
-  context "considering constants" do
-    domain_regexp = /\A[a-z0-9.-]+[a-z0-9]\.[a-z]+\z/
-    tld_regexp = /\A\.[a-z0-9]+\.[a-z]+\z/
-
-    describe "COMMON_DOMAINS" do
-      it "contains only domains" do
-        described_class::COMMON_DOMAINS.each do |element|
-          expect(element).to match(domain_regexp)
-        end
-      end
-    end
-
-    describe "UNIQUE_TLD_DOMAINS" do
-      it "contains only domains" do
-        described_class::UNIQUE_TLD_DOMAINS.each do |element|
-          expect(element).to match(domain_regexp)
-        end
-      end
-    end
-
-    describe "ONE_TIME_EMAIL_PROVIDERS" do
-      it "contains only domains" do
-        described_class::ONE_TIME_EMAIL_PROVIDERS.each do |element|
-          expect(element).to match(domain_regexp)
-        end
-      end
-    end
-
-    describe "VALID_CC_TLDS" do
-      it "contains only TLDs" do
-        described_class::VALID_CC_TLDS.each do |_tld, _sld, valid_tlds|
-          valid_tlds.each do |element|
-            expect(element).to match(tld_regexp)
-          end
-        end
-      end
+  describe "VALIDATORS" do
+    it "contains only EmailInquire::Validator::Base descendents" do
+      expect(described_class::VALIDATORS).to all(satisfy { |k| k < EmailInquire::Validator::Base })
     end
   end
 
@@ -50,68 +17,65 @@ RSpec.describe EmailInquire::Inquirer do
   end
 
   describe "#validate" do
-    it "returns a EmailInquire::Response" do
-      subject = described_class.new("john.doe@domain.com")
-      expect(subject.validate).to be_a(EmailInquire::Response)
+    subject { described_class.new(email) }
+
+    let(:email) { "john.doe@domain.com" }
+
+    it "returns the first response of its validators" do
+      expected_response = EmailInquire::Response.new(email: email).invalid!
+
+      stub_const(
+        "EmailInquire::Inquirer::VALIDATORS", [
+          double(:validator, validate: nil),
+          double(:validator, validate: expected_response),
+          double(:validator, validate: EmailInquire::Response.new(email: email).invalid!),
+        ]
+      )
+
+      expect(subject.validate).to equal(expected_response)
     end
 
-    context "with a valid email" do
-      let(:email) { "john.doe@domain.com" }
+    it "returns a valid response when none of its validators give a response" do
+      stub_const(
+        "EmailInquire::Inquirer::VALIDATORS", [
+          double(:validator, validate: nil),
+          double(:validator, validate: nil),
+          double(:validator, validate: nil),
+        ]
+      )
 
-      it "returns an according EmailInquire::Response" do
-        subject = described_class.new(email)
-        expect(subject.validate).to have_attributes({
-          email: email,
-          valid?: true,
-          hint?: false,
-          invalid?: false,
-          replacement: nil,
-        })
+      expect(subject.validate).to be_a(EmailInquire::Response).and have_attributes({
+        email: "john.doe@domain.com",
+        valid?: true,
+        hint?: false,
+        invalid?: false,
+        replacement: nil,
+      })
+    end
+
+    context "with a valid email containing upcase chars" do
+      let(:email) { "John.Doe@Domain.Com" }
+
+      it "calls its validators with the downcased email" do
+        validator = double(:validator)
+        expect(validator).to receive(:validate).with("john.doe@domain.com")
+
+        stub_const("EmailInquire::Inquirer::VALIDATORS", [validator])
+
+        subject.validate
       end
     end
 
-    context "with an email with a mistake" do
-      let(:email) { "john.doe@gnail.com" }
+    context "with a nil email" do
+      let(:email) { nil }
 
-      it "returns an according EmailInquire::Response" do
-        subject = described_class.new(email)
-        expect(subject.validate).to have_attributes({
-          email: email,
-          valid?: false,
-          hint?: true,
-          invalid?: false,
-          replacement: "john.doe@gmail.com",
-        })
-      end
-    end
+      it "calls its validators with the nil email" do
+        validator = double(:validator)
+        expect(validator).to receive(:validate).with(nil)
 
-    context "with an invalid email" do
-      let(:email) { "john.doe@my--domain.com" }
+        stub_const("EmailInquire::Inquirer::VALIDATORS", [validator])
 
-      it "returns an according EmailInquire::Response" do
-        subject = described_class.new(email)
-        expect(subject.validate).to have_attributes({
-          email: email,
-          valid?: false,
-          hint?: false,
-          invalid?: true,
-          replacement: nil,
-        })
-      end
-    end
-
-    context "with a burner email" do
-      let(:email) { "john.doe@yopmail.com" }
-
-      it "returns an according EmailInquire::Response" do
-        subject = described_class.new(email)
-        expect(subject.validate).to have_attributes({
-          email: email,
-          valid?: false,
-          hint?: false,
-          invalid?: true,
-          replacement: nil,
-        })
+        subject.validate
       end
     end
   end

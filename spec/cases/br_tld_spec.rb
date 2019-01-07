@@ -4,8 +4,8 @@ require "spec_helper"
 
 RSpec.describe "Case: BR TLD" do
   %w[
-    john.doe@domain.br
     john.doe@domain.ci.br
+    john.doe@domain.co.br
     john.doe@domain.combr
     john.doe@domaincom.br
     john.doe@domain.xo.br
@@ -16,6 +16,12 @@ RSpec.describe "Case: BR TLD" do
       expect(response.status).to eq(:hint)
       expect(response.replacement).to eq("john.doe@domain.com.br")
     end
+  end
+
+  # Registration of .br has now opened
+  it "does not propose a hint for john.doe@domain.br as domain.br may exists" do
+    response = EmailInquire.validate("john.doe@domain.br")
+    expect(response.status).to eq(:valid)
   end
 
   # https://en.wikipedia.org/wiki/.br

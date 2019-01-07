@@ -15,6 +15,8 @@ module EmailInquire
 
       old_name, _old_domain = email.split("@")
       self.replacement = "#{old_name}@#{domain}"
+
+      self
     end
 
     def hint?
@@ -23,6 +25,8 @@ module EmailInquire
 
     def invalid!
       self.status = :invalid
+
+      self
     end
 
     def invalid?
@@ -35,6 +39,8 @@ module EmailInquire
 
     def valid!
       self.status = :valid
+
+      self
     end
 
     def valid?

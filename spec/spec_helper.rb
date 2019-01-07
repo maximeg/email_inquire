@@ -29,3 +29,5 @@ RSpec.configure do |config|
     EmailInquire.custom_valid_domains = nil
   end
 end
+
+DOMAIN_REGEXP_SPEC = /\A[a-z0-9.-]+[a-z0-9]\.[a-z]+\z/.freeze

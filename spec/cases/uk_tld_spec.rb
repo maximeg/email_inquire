@@ -5,7 +5,6 @@ require "spec_helper"
 RSpec.describe "Case: UK TLD" do
   %w[
     john.doe@domain.ci.uk
-    john.doe@domain.uk
     john.doe@domain.xo.uk
     john.doe@domain.zz.uk
     john.doe@domainco.uk
@@ -17,8 +16,15 @@ RSpec.describe "Case: UK TLD" do
     end
   end
 
+  # Registration of .uk has now opened
+  it "does not propose a hint for john.doe@domain.uk as domain.uk may exists" do
+    response = EmailInquire.validate("john.doe@domain.uk")
+    expect(response.status).to eq(:valid)
+  end
+
   # https://en.wikipedia.org/wiki/.uk
   %w[
+    john.doe@domain.uk
     john.doe@domain.ac.uk
     john.doe@domain.co.uk
     john.doe@domain.gov.uk
@@ -38,6 +44,20 @@ RSpec.describe "Case: UK TLD" do
     it "does not propose a hint for #{kase}" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:valid)
+    end
+  end
+
+  {
+    "john.doe@aol.uk" => "john.doe@aol.co.uk",
+    "john.doe@blueyonder.uk" => "john.doe@blueyonder.co.uk",
+    "john.doe@hotmail.uk" => "john.doe@hotmail.co.uk",
+    "john.doe@live.uk" => "john.doe@live.co.uk",
+    "john.doe@yahoo.uk" => "john.doe@yahoo.co.uk",
+  }.each do |kase, hint|
+    it "proposes a hint for #{kase}" do
+      response = EmailInquire.validate(kase)
+      expect(response.status).to eq(:hint)
+      expect(response.replacement).to eq(hint)
     end
   end
 end

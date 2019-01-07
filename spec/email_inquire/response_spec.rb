@@ -7,7 +7,7 @@ RSpec.describe EmailInquire::Response do
 
   describe "#hint!" do
     before do
-      subject.hint!(domain: "newdomain.com")
+      @returned = subject.hint!(domain: "newdomain.com")
     end
 
     it "sets the status to hint" do
@@ -21,11 +21,15 @@ RSpec.describe EmailInquire::Response do
     it "sets the replacement address" do
       expect(subject.replacement).to eq("john.doe@newdomain.com")
     end
+
+    it "returns self" do
+      expect(@returned).to equal(subject)
+    end
   end
 
   describe "#invalid!" do
     before do
-      subject.invalid!
+      @returned = subject.invalid!
     end
 
     it "sets the status to invalid" do
@@ -38,6 +42,10 @@ RSpec.describe EmailInquire::Response do
 
     it "does not set a replacement address" do
       expect(subject.replacement).to eq(nil)
+    end
+
+    it "returns self" do
+      expect(@returned).to equal(subject)
     end
   end
 
@@ -61,7 +69,7 @@ RSpec.describe EmailInquire::Response do
 
   describe "#valid!" do
     before do
-      subject.valid!
+      @returned = subject.valid!
     end
 
     it "sets the status to valid" do
@@ -74,6 +82,10 @@ RSpec.describe EmailInquire::Response do
 
     it "does not set a replacement address" do
       expect(subject.replacement).to eq(nil)
+    end
+
+    it "returns self" do
+      expect(@returned).to equal(subject)
     end
   end
 end

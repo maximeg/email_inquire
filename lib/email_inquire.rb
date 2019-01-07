@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 require "email_inquire/version"
-require "email_inquire/email_validator"
 require "email_inquire/inquirer"
-require "email_inquire/response"
 
 module EmailInquire
 
