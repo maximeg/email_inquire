@@ -59,8 +59,9 @@ ccTLD specificity, like United Kingdom `.xx.uk` domains:
 
 - `foo.couk` => hint `foo.co.uk`
 - `fooco.uk` => hint `foo.co.uk`
-- `foo.uk` => hint `foo.co.uk`
+- `yahoo.uk` => hint `yahoo.co.uk`
 - `foo.judiciary.uk` => ok!
+- `foo.uk` => ok, .uk is open to registration
 - ...
 
 ...and same thing with `.co.jp` & `.com.br` domains.

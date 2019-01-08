@@ -3,6 +3,18 @@
 ## [Unreleased]
 [Full Changelog](https://github.com/maximeg/email_inquire/compare/v0.9.0...master)
 
+**Changed:**
+
+- ccTLD open to registration are no longer hinted from foo.xx to foo.co.xx
+  (common providers are still hinted, e.g. yahoo.uk => yahoo.co.uk)
+  ([maximeg](https://github.com/maximeg))
+
+**Dev:**
+
+- Add mutant to do mutation testing ([maximeg](https://github.com/maximeg))
+- Extract validators into their own class ([maximeg](https://github.com/maximeg))
+- Bring mutation testing coverage to 100% ([maximeg](https://github.com/maximeg))
+
 ## [v0.9.0](https://github.com/maximeg/email_inquire/tree/v0.9.0) (2019-01-04)
 [Full Changelog](https://github.com/maximeg/email_inquire/compare/v0.8.0...v0.9.0)
 
