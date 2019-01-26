@@ -6,24 +6,6 @@ module EmailInquire
   module Validator
     class EmailFormat < Base
 
-      # Relevant literature:
-      # http://emailregex.com/email-validation-summary/
-      # http://www.regular-expressions.info/email.html
-
-      def validate
-        response.invalid! if !email || email.length > 255 || !name_valid? || !domain_valid?
-      end
-
-      private
-
-      def domain_valid?
-        domain =~ DOMAIN_REGEXP
-      end
-
-      def name_valid?
-        name =~ NAME_REGEXP
-      end
-
       DOMAIN_REGEXP = /
         \A
         (?:
@@ -42,12 +24,32 @@ module EmailInquire
         \z
       /x.freeze
 
+      NAME_ALLOWED_CHARS = /[a-z0-9._%+-]/.freeze
+
       NAME_REGEXP = /
         \A
         [a-z0-9]
-        [a-z0-9._%+-]{0,63}
+        [#{NAME_ALLOWED_CHARS}]{0,63}
         \z
       /x.freeze
+
+      # Relevant literature:
+      # http://emailregex.com/email-validation-summary/
+      # http://www.regular-expressions.info/email.html
+
+      def validate
+        response.invalid! if !email || email.length > 255 || !name_valid? || !domain_valid?
+      end
+
+      private
+
+      def domain_valid?
+        domain =~ DOMAIN_REGEXP
+      end
+
+      def name_valid?
+        name =~ NAME_REGEXP
+      end
 
     end
   end

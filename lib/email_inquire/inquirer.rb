@@ -17,12 +17,6 @@ require "email_inquire/validator/unique_domain_provider"
 module EmailInquire
   class Inquirer
 
-    def initialize(email)
-      @email = email&.downcase
-    end
-
-    attr_reader :email
-
     VALIDATORS = [
       # Format first
       EmailInquire::Validator::EmailFormat,
@@ -45,6 +39,12 @@ module EmailInquire
       EmailInquire::Validator::CountryCodeTld,
       EmailInquire::Validator::UniqueDomainProvider,
     ].freeze
+
+    def initialize(email)
+      @email = email&.downcase
+    end
+
+    attr_reader :email
 
     def validate
       response = Helper.first_value(VALIDATORS) { |validator| validator.validate(email) }

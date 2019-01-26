@@ -1,3 +1,8 @@
+inherit_mode:
+  merge:
+    - Include
+    - Exclude
+
 AllCops:
   Exclude:
     - 'bin/*'
@@ -17,6 +22,22 @@ Layout/AlignHash:
 Layout/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
+Layout/ClassStructure:
+  Enabled: true
+  Categories:
+    module_inclusion:
+      - include
+      - prepend
+      - extend
+  ExpectedOrder:
+    - module_inclusion
+    - constants
+    - public_class_methods
+    - initializer
+    - public_methods
+    - protected_methods
+    - private_methods
+
 Layout/EmptyLinesAroundClassBody:
   EnforcedStyle: empty_lines_except_namespace
 
@@ -30,13 +51,13 @@ Layout/ExtraSpacing:
   AllowForAlignment: false
 
 Layout/FirstArrayElementLineBreak:
-  Enabled: true
+  Enabled: true # default: false
 
 Layout/FirstHashElementLineBreak:
-  Enabled: true
+  Enabled: true # default: false
 
 Layout/FirstMethodArgumentLineBreak:
-  Enabled: true
+  Enabled: true # default: false
 
 Layout/FirstParameterIndentation:
   EnforcedStyle: consistent
@@ -48,7 +69,7 @@ Layout/IndentHash:
   EnforcedStyle: consistent
 
 Layout/MultilineAssignmentLayout:
-  Enabled: true
+  Enabled: true # default: false
   EnforcedStyle: new_line
 
 Layout/MultilineMethodCallIndentation:
@@ -63,65 +84,74 @@ Layout/SpaceAroundOperators:
 Layout/SpaceBeforeFirstArg:
   AllowForAlignment: false
 
-Lint/RedundantWithIndex:
-  Enabled: true
-
 Lint/UnusedMethodArgument:
   AllowUnusedKeywordArguments: true
   IgnoreEmptyMethods: true
 
 Metrics/AbcSize:
-  Enabled: true
   Max: 20 # default: 15
 
 Metrics/BlockLength:
-  Enabled: true
+  Max: 25 # default: 25
+
+Metrics/ClassLength:
+  Max: 100 # default: 100
 
 Metrics/CyclomaticComplexity:
-  Enabled: true
   Max: 10 # default: 6
 
 Metrics/LineLength:
-  Enabled: true
   Max: 100 # default: 80
   IgnoredPatterns:
     - "^ *#" # comments
 
 Metrics/MethodLength:
-  Enabled: true
   Max: 12 # default: 10
 
+Metrics/ModuleLength:
+  Max: 100 # default: 100
+
 Metrics/PerceivedComplexity:
-  Enabled: true
   Max: 10 # default: 7
+
+Performance/ChainArrayAllocation:
+  Enabled: true # default: false
+
+Performance/OpenStruct:
+  Enabled: true # default: false
 
 Naming/VariableNumber:
   EnforcedStyle: snake_case
 
 Style/AccessModifierDeclarations:
-  Enabled: false
+  Enabled: false # default: true
 
 Style/AndOr:
-  Enabled: true
   EnforcedStyle: conditionals
 
 Style/AsciiComments:
-  Enabled: false
+  Enabled: false # default: true
+
+Style/AutoResourceCleanup:
+  Enabled: true # default: false
 
 Style/BracesAroundHashParameters:
-  Enabled: false
+  Enabled: false # default: true
 
-Style/Dir:
-  Enabled: true
+Style/CollectionMethods:
+  Enabled: true # default: false
+
+Style/DateTime:
+  Enabled: true # default: false
 
 Style/Documentation:
-  Enabled: false
+  Enabled: false # default: true
 
-Style/FrozenStringLiteralComment:
-  Enabled: true
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true # default: false
 
 Style/MethodCallWithArgsParentheses:
-  Enabled: true # false by default
+  Enabled: true # default: false
   Exclude:
     - "Gemfile"
   IgnoreMacros: true
@@ -145,17 +175,15 @@ Style/ModuleFunction:
   EnforcedStyle: extend_self
 
 Style/ReturnNil:
-  Enabled: true
+  Enabled: true # default: false
 
 Style/SignalException:
   EnforcedStyle: only_raise
 
 Style/StringLiterals:
-  Enabled: true
   EnforcedStyle: double_quotes
 
 Style/StringLiteralsInInterpolation:
-  Enabled: true
   EnforcedStyle: double_quotes
 
 Style/TrailingCommaInArguments:

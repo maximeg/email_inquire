@@ -1,30 +1,19 @@
 inherit_from: ../.rubocop.yml
 
 Metrics/BlockLength:
-  Enabled: false
+  Enabled: false # default: true
 
 Style/BlockDelimiters:
-  Enabled: false
+  Enabled: false # default: true
 
 Style/Documentation:
-  Enabled: false
-
-Style/GlobalVars:
-  AllowedVariables:
-    - $logger
+  Enabled: false # default: true
 
 Style/MethodCallWithArgsParentheses:
-  Enabled: true # false by default
-  Exclude:
-    - "factories/**/*"
-  IgnoreMacros: true
+  inherit_mode:
+    merge:
+      - IgnoredMethods
   IgnoredMethods:
-    - include
-    - load
-    - print
-    - puts
-    - raise
-    - require
     # rspec
     - after
     - and
