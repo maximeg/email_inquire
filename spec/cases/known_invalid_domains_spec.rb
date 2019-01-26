@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe "Case: Known invalid domains" do
+RSpec.describe "Case: Known invalid domains", type: :feature do
   %w[
     john.doe@example.com
   ].each do |kase|

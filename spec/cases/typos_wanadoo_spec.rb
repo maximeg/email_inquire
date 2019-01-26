@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe "Case: Wanadoo typos" do
+RSpec.describe "Case: Wanadoo typos", type: :feature do
   %w[
     john.doe@wanado.fr
     john.doe@wanadoi.fr
@@ -14,10 +14,12 @@ RSpec.describe "Case: Wanadoo typos" do
     john.doe@wanasoo.fr
     john.doe@wandoo.fr
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@wanadoo.fr")
+      expect(response).to have_attributes({
+        replacement: "john.doe@wanadoo.fr",
+        status: :hint,
+      })
     end
   end
 end

@@ -2,15 +2,17 @@
 
 require "spec_helper"
 
-RSpec.describe "Case: Outlook typos" do
+RSpec.describe "Case: Outlook typos", type: :feature do
   %w[
     john.doe@outloo.com
     john.doe@outloock.com
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@outlook.com")
+      expect(response).to have_attributes({
+        replacement: "john.doe@outlook.com",
+        status: :hint,
+      })
     end
   end
 
@@ -25,10 +27,12 @@ RSpec.describe "Case: Outlook typos" do
     john.doe@outlook.ft
     john.doe@outlouk.fr
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@outlook.fr")
+      expect(response).to have_attributes({
+        replacement: "john.doe@outlook.fr",
+        status: :hint,
+      })
     end
   end
 end

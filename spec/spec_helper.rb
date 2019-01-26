@@ -13,6 +13,8 @@ end
 require "bundler/setup"
 require "email_inquire"
 
+Dir["#{__dir__}/support/**/*.rb"].each { |f| require f }
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
@@ -29,7 +31,7 @@ RSpec.configure do |config|
   config.order = :random
   Kernel.srand(config.seed)
 
-  config.before(:each) do
+  config.before do
     EmailInquire.custom_invalid_domains = nil
     EmailInquire.custom_valid_domains = nil
   end

@@ -1,7 +1,28 @@
 inherit_from: ../.rubocop.yml
 
+require: rubocop-rspec
+
 Metrics/BlockLength:
   Enabled: false # default: true
+
+RSpec/ContextWording:
+  Prefixes:
+    - considering
+    - when
+    - with
+    - without
+
+RSpec/ExampleLength:
+  Max: 12 # default: 5
+
+RSpec/MultipleExpectations:
+  Max: 4 # default: 1
+
+RSpec/NamedSubject:
+  Enabled: false # default: true
+
+RSpec/NestedGroups:
+  Max: 6 # default: 3
 
 Style/BlockDelimiters:
   Enabled: false # default: true

@@ -5,6 +5,7 @@
 
 **Dev:**
 
+- Quality: Add Rubocop-RSpec ([maximeg](https://github.com/maximeg))
 - Quality: Update Rubocop to 0.63 ([maximeg](https://github.com/maximeg))
 
 ## [v0.10.0](https://github.com/maximeg/email_inquire/tree/v0.10.0) (2019-01-08)

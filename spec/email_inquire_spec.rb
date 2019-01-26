@@ -3,6 +3,12 @@
 require "spec_helper"
 
 RSpec.describe EmailInquire do
+  describe "VERSION" do
+    it "exists and has the right format" do
+      expect(described_class::VERSION).to be_a(String).and match(/\A\d+\.\d+\.\d+\z/)
+    end
+  end
+
   describe ".custom_invalid_domains" do
     context "when untouched" do
       it "returns a set" do
@@ -28,8 +34,6 @@ RSpec.describe EmailInquire do
 
       it "returns the same set" do
         expect(described_class.custom_invalid_domains).to equal(set)
-        expect(described_class.custom_invalid_domains)
-          .to equal(described_class.custom_invalid_domains)
       end
     end
   end
@@ -57,8 +61,7 @@ RSpec.describe EmailInquire do
       expect {
         described_class.custom_invalid_domains = "domain1.com"
       }.to raise_error(ArgumentError, "Unsupported type in `custom_invalid_domains=`")
-
-      expect(described_class.custom_invalid_domains).to eq(Set.new)
+        .and not_change { described_class.custom_invalid_domains }.from(Set.new)
     end
   end
 
@@ -86,7 +89,6 @@ RSpec.describe EmailInquire do
 
       it "returns the same set" do
         expect(described_class.custom_valid_domains).to equal(set)
-        expect(described_class.custom_valid_domains).to equal(described_class.custom_valid_domains)
       end
     end
   end
@@ -114,8 +116,7 @@ RSpec.describe EmailInquire do
       expect {
         described_class.custom_valid_domains = "domain1.com"
       }.to raise_error(ArgumentError, "Unsupported type in `custom_valid_domains=`")
-
-      expect(described_class.custom_valid_domains).to eq(Set.new)
+        .and not_change { described_class.custom_valid_domains }.from(Set.new)
     end
   end
 
@@ -123,8 +124,7 @@ RSpec.describe EmailInquire do
     it "works" do
       response = described_class.validate("john.doe@domain.com")
 
-      expect(response).to be_a(EmailInquire::Response)
-      expect(response).to be_valid
+      expect(response).to be_a(EmailInquire::Response).and be_valid
     end
   end
 end

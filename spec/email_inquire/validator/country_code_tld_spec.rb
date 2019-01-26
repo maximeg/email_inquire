@@ -22,7 +22,7 @@ RSpec.describe EmailInquire::Validator::CountryCodeTld do
       expect(described_class.validate("john@domain.xyz")).to eq(nil)
     end
 
-    context "for a .comi.xx ccTLD" do
+    context "with a .comi.xx ccTLD" do
       shared_examples "common .comi.xx" do
         it "returns nil for an address with a listed generic domain" do
           expect(described_class.validate("john@domain.comi.xx")).to eq(nil)
@@ -53,7 +53,7 @@ RSpec.describe EmailInquire::Validator::CountryCodeTld do
             .and have_attributes(replacement: "john@domain.comi.xx")
         end
 
-        it "returns a hint for an address with a listed generic domain and tld without the dot" do
+        it "returns a hint for an address with the com generic domain and tld without the dot" do
           expect(described_class.validate("john@domain.comixx")).to be_a(EmailInquire::Response)
             .and be_hint
             .and have_attributes(replacement: "john@domain.comi.xx")
@@ -61,7 +61,9 @@ RSpec.describe EmailInquire::Validator::CountryCodeTld do
           expect(described_class.validate("john@sub.domain.comixx")).to be_a(EmailInquire::Response)
             .and be_hint
             .and have_attributes(replacement: "john@sub.domain.comi.xx")
+        end
 
+        it "returns a hint for an address with a listed generic domain and tld without the dot" do
           expect(described_class.validate("john@domain.fooxx")).to be_a(EmailInquire::Response)
             .and be_hint
             .and have_attributes(replacement: "john@domain.foo.xx")
@@ -69,22 +71,16 @@ RSpec.describe EmailInquire::Validator::CountryCodeTld do
           expect(described_class.validate("john@sub.domain.fooxx")).to be_a(EmailInquire::Response)
             .and be_hint
             .and have_attributes(replacement: "john@sub.domain.foo.xx")
+        end
 
-          expect(described_class.validate("john@domain.barxx")).to be_a(EmailInquire::Response)
-            .and be_hint
-            .and have_attributes(replacement: "john@domain.bar.xx")
-
-          expect(described_class.validate("john@sub.domain.barxx")).to be_a(EmailInquire::Response)
-            .and be_hint
-            .and have_attributes(replacement: "john@sub.domain.bar.xx")
-
+        it "returns nil for an address with nearly a tld without the dot" do
           # Special case
           expect(described_class.validate("john@domai.ncoxx")).to eq(nil)
 
           expect(described_class.validate("john@sub.domai.ncoxx")).to eq(nil)
         end
 
-        it "returns a hint for an address with the generic domain at the end of the domain" do
+        it "returns a hint for an address with the com domain at the end of the domain" do
           expect(described_class.validate("john@domaincomi.xx")).to be_a(EmailInquire::Response)
             .and be_hint
             .and have_attributes(replacement: "john@domain.comi.xx")
@@ -92,7 +88,9 @@ RSpec.describe EmailInquire::Validator::CountryCodeTld do
           expect(described_class.validate("john@sub.domaincomi.xx")).to be_a(EmailInquire::Response)
             .and be_hint
             .and have_attributes(replacement: "john@sub.domain.comi.xx")
+        end
 
+        it "returns a hint for an address with a listed generic domain at the end of the domain" do
           expect(described_class.validate("john@domainfoo.xx")).to be_a(EmailInquire::Response)
             .and be_hint
             .and have_attributes(replacement: "john@domain.foo.xx")
@@ -100,14 +98,6 @@ RSpec.describe EmailInquire::Validator::CountryCodeTld do
           expect(described_class.validate("john@sub.domainfoo.xx")).to be_a(EmailInquire::Response)
             .and be_hint
             .and have_attributes(replacement: "john@sub.domain.foo.xx")
-
-          expect(described_class.validate("john@domainbar.xx")).to be_a(EmailInquire::Response)
-            .and be_hint
-            .and have_attributes(replacement: "john@domain.bar.xx")
-
-          expect(described_class.validate("john@sub.domainbar.xx")).to be_a(EmailInquire::Response)
-            .and be_hint
-            .and have_attributes(replacement: "john@sub.domain.bar.xx")
         end
 
         it "returns a hint for an address matching a common provider" do
@@ -127,10 +117,10 @@ RSpec.describe EmailInquire::Validator::CountryCodeTld do
         end
       end
 
-      context "allowing registration with .xx" do
+      context "when allowing registration with .xx" do
         before do
           stub_const(
-            "EmailInquire::Validator::CountryCodeTld::COUNTRY_CODE_TLDS",
+            "#{described_class}::COUNTRY_CODE_TLDS",
             [
               ["xx", "comi", %w[comi foo bar].freeze, true].freeze,
             ].freeze
@@ -145,7 +135,7 @@ RSpec.describe EmailInquire::Validator::CountryCodeTld do
           )
         end
 
-        context "for an address with a listed tld" do
+        context "with an address with a listed tld" do
           include_examples "common .comi.xx"
 
           it "returns nil for an address without the generic domain" do
@@ -160,10 +150,10 @@ RSpec.describe EmailInquire::Validator::CountryCodeTld do
         end
       end
 
-      context "not allowing registration with .xx" do
+      context "when not allowing registration with .xx" do
         before do
           stub_const(
-            "EmailInquire::Validator::CountryCodeTld::COUNTRY_CODE_TLDS",
+            "#{described_class}::COUNTRY_CODE_TLDS",
             [
               ["xx", "comi", %w[comi foo bar].freeze, false].freeze,
             ].freeze
@@ -177,7 +167,7 @@ RSpec.describe EmailInquire::Validator::CountryCodeTld do
           )
         end
 
-        context "for an address with a listed tld" do
+        context "with an address with a listed tld" do
           include_examples "common .comi.xx"
 
           it "returns a hint for an address without the generic domain" do

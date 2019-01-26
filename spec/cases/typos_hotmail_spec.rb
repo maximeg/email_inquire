@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe "Case: Hotmail typos" do
+RSpec.describe "Case: Hotmail typos", type: :feature do
   %w[
     john.doe@hitmail.com
     john.doe@homail.com
@@ -21,10 +21,12 @@ RSpec.describe "Case: Hotmail typos" do
     john.doe@jotmail.com
     john.doe@otmail.com
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@hotmail.com")
+      expect(response).to have_attributes({
+        replacement: "john.doe@hotmail.com",
+        status: :hint,
+      })
     end
   end
 
@@ -60,10 +62,12 @@ RSpec.describe "Case: Hotmail typos" do
     john.doe@htmail.fr
     john.doe@jotmail.fr
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@hotmail.fr")
+      expect(response).to have_attributes({
+        replacement: "john.doe@hotmail.fr",
+        status: :hint,
+      })
     end
   end
 
@@ -71,7 +75,7 @@ RSpec.describe "Case: Hotmail typos" do
   %w[
     john.doe@hotmai.com
   ].each do |kase|
-    it "sets #{kase} as invalid" do
+    it "considers invalid `#{kase}`" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:invalid)
     end

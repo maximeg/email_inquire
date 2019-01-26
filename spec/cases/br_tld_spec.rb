@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe "Case: BR TLD" do
+RSpec.describe "Case: BR TLD", type: :feature do
   %w[
     john.doe@domain.ci.br
     john.doe@domain.co.br
@@ -11,15 +11,17 @@ RSpec.describe "Case: BR TLD" do
     john.doe@domain.xo.br
     john.doe@domain.zz.br
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@domain.com.br")
+      expect(response).to have_attributes({
+        replacement: "john.doe@domain.com.br",
+        status: :hint,
+      })
     end
   end
 
   # Registration of .br has now opened
-  it "does not propose a hint for john.doe@domain.br as domain.br may exists" do
+  it "does not propose a hint for `john.doe@domain.br` as domain.br may exists" do
     response = EmailInquire.validate("john.doe@domain.br")
     expect(response.status).to eq(:valid)
   end
@@ -100,7 +102,7 @@ RSpec.describe "Case: BR TLD" do
     john.doe@domain.wiki.br
     john.doe@domain.zlg.br
   ].each do |kase|
-    it "does not propose a hint for #{kase}" do
+    it "does not propose a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:valid)
     end

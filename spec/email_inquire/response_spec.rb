@@ -7,7 +7,7 @@ RSpec.describe EmailInquire::Response do
 
   describe "#hint!" do
     before do
-      @returned = subject.hint!(domain: "newdomain.com")
+      subject.hint!(domain: "newdomain.com")
     end
 
     it "sets the status to hint" do
@@ -23,13 +23,13 @@ RSpec.describe EmailInquire::Response do
     end
 
     it "returns self" do
-      expect(@returned).to equal(subject)
+      expect(subject.hint!(domain: "newdomain.com")).to equal(subject)
     end
   end
 
   describe "#invalid!" do
     before do
-      @returned = subject.invalid!
+      subject.invalid!
     end
 
     it "sets the status to invalid" do
@@ -45,7 +45,7 @@ RSpec.describe EmailInquire::Response do
     end
 
     it "returns self" do
-      expect(@returned).to equal(subject)
+      expect(subject.invalid!).to equal(subject)
     end
   end
 
@@ -69,7 +69,7 @@ RSpec.describe EmailInquire::Response do
 
   describe "#valid!" do
     before do
-      @returned = subject.valid!
+      subject.valid!
     end
 
     it "sets the status to valid" do
@@ -85,7 +85,7 @@ RSpec.describe EmailInquire::Response do
     end
 
     it "returns self" do
-      expect(@returned).to equal(subject)
+      expect(subject.valid!).to equal(subject)
     end
   end
 end

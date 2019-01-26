@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe "Case: Custom valid domains" do
+RSpec.describe "Case: Custom valid domains", type: :feature do
   context "when EmailInquire.custom_valid_domains is not set" do
     it "works for hinted domains" do
       response = EmailInquire.validate("john.doe@sfr.com")

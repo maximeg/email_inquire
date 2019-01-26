@@ -2,12 +2,12 @@
 
 require "spec_helper"
 
-RSpec.describe "Case: Gmail typos" do
+RSpec.describe "Case: Gmail typos", type: :feature do
   %w[
     john.doe@gmail.com
     john.doe@googlemail.com
   ].each do |kase|
-    it "considers valid #{kase}" do
+    it "considers valid `#{kase}`" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:valid)
     end
@@ -51,10 +51,12 @@ RSpec.describe "Case: Gmail typos" do
     john.doe@google.fr
     john.doe@hmail.com
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@gmail.com")
+      expect(response).to have_attributes({
+        replacement: "john.doe@gmail.com",
+        status: :hint,
+      })
     end
   end
 
@@ -63,7 +65,7 @@ RSpec.describe "Case: Gmail typos" do
     john.doe@gmal.com
     john.doe@gmial.com
   ].each do |kase|
-    it "sets #{kase} as invalid" do
+    it "considers invalid `#{kase}`" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:invalid)
     end

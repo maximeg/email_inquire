@@ -2,22 +2,24 @@
 
 require "spec_helper"
 
-RSpec.describe "Case: UK TLD" do
+RSpec.describe "Case: UK TLD", type: :feature do
   %w[
     john.doe@domain.ci.uk
     john.doe@domain.xo.uk
     john.doe@domain.zz.uk
     john.doe@domainco.uk
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@domain.co.uk")
+      expect(response).to have_attributes({
+        replacement: "john.doe@domain.co.uk",
+        status: :hint,
+      })
     end
   end
 
   # Registration of .uk has now opened
-  it "does not propose a hint for john.doe@domain.uk as domain.uk may exists" do
+  it "does not propose a hint for `john.doe@domain.uk` as domain.uk may exists" do
     response = EmailInquire.validate("john.doe@domain.uk")
     expect(response.status).to eq(:valid)
   end
@@ -41,7 +43,7 @@ RSpec.describe "Case: UK TLD" do
     john.doe@domain.police.uk
     john.doe@domain.sch.uk
   ].each do |kase|
-    it "does not propose a hint for #{kase}" do
+    it "does not propose a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:valid)
     end
@@ -54,10 +56,12 @@ RSpec.describe "Case: UK TLD" do
     "john.doe@live.uk" => "john.doe@live.co.uk",
     "john.doe@yahoo.uk" => "john.doe@yahoo.co.uk",
   }.each do |kase, hint|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq(hint)
+      expect(response).to have_attributes({
+        replacement: hint,
+        status: :hint,
+      })
     end
   end
 end

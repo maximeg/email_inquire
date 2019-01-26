@@ -2,22 +2,24 @@
 
 require "spec_helper"
 
-RSpec.describe "Case: JP TLD" do
+RSpec.describe "Case: JP TLD", type: :feature do
   %w[
     john.doe@domain.ci.jp
     john.doe@domain.xo.jp
     john.doe@domain.zz.jp
     john.doe@domainco.jp
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@domain.co.jp")
+      expect(response).to have_attributes({
+        replacement: "john.doe@domain.co.jp",
+        status: :hint,
+      })
     end
   end
 
   # Registration of .jp has now opened
-  it "does not propose a hint for john.doe@domain.jp as domain.jp may exists" do
+  it "does not propose a hint for `john.doe@domain.jp` as domain.jp may exists" do
     response = EmailInquire.validate("john.doe@domain.jp")
     expect(response.status).to eq(:valid)
   end
@@ -34,7 +36,7 @@ RSpec.describe "Case: JP TLD" do
     john.doe@domain.ne.jp
     john.doe@domain.or.jp
   ].each do |kase|
-    it "does not propose a hint for #{kase}" do
+    it "does not propose a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:valid)
     end

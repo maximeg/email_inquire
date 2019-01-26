@@ -2,14 +2,14 @@
 
 require "spec_helper"
 
-RSpec.describe "Case: Yahoo typos" do
+RSpec.describe "Case: Yahoo typos", type: :feature do
   %w[
     john.doe@yahoo.co.uk
     john.doe@yahoo.com
     john.doe@yahoo.fr
     john.doe@ymail.com
   ].each do |kase|
-    it "considers valid #{kase}" do
+    it "considers valid `#{kase}`" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:valid)
     end
@@ -18,10 +18,12 @@ RSpec.describe "Case: Yahoo typos" do
   %w[
     john.doe@yahooo.com
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@yahoo.com")
+      expect(response).to have_attributes({
+        replacement: "john.doe@yahoo.com",
+        status: :hint,
+      })
     end
   end
 
@@ -42,10 +44,12 @@ RSpec.describe "Case: Yahoo typos" do
     john.doe@yaoo.fr
     john.doe@yhaoo.fr
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@yahoo.fr")
+      expect(response).to have_attributes({
+        replacement: "john.doe@yahoo.fr",
+        status: :hint,
+      })
     end
   end
 
@@ -53,10 +57,12 @@ RSpec.describe "Case: Yahoo typos" do
     john.doe@yahoo.uk
     john.doe@yhoo.co.uk
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@yahoo.co.uk")
+      expect(response).to have_attributes({
+        replacement: "john.doe@yahoo.co.uk",
+        status: :hint,
+      })
     end
   end
 end

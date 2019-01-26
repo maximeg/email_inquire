@@ -2,15 +2,17 @@
 
 require "spec_helper"
 
-RSpec.describe "Case: iCloud typos" do
+RSpec.describe "Case: iCloud typos", type: :feature do
   # nice to have: john.doe@icould.com
   %w[
     john.doe@cloud.com
   ].each do |kase|
-    it "proposes a hint for #{kase}" do
+    it "proposes a hint for `#{kase}`" do
       response = EmailInquire.validate(kase)
-      expect(response.status).to eq(:hint)
-      expect(response.replacement).to eq("john.doe@icloud.com")
+      expect(response).to have_attributes({
+        replacement: "john.doe@icloud.com",
+        status: :hint,
+      })
     end
   end
 end

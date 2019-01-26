@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe "Case: One-time email providers" do
+RSpec.describe "Case: One-time email providers", type: :feature do
   %w[
     john.doe@0-mail.com
     john.doe@disposemail.com
@@ -10,7 +10,7 @@ RSpec.describe "Case: One-time email providers" do
     john.doe@yopmail.com
     john.doe@yopmail.fr
   ].each do |kase|
-    it "detects #{kase}" do
+    it "detects `#{kase}`" do
       response = EmailInquire.validate(kase)
       expect(response.status).to eq(:invalid)
     end
