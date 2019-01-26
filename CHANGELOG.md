@@ -5,6 +5,7 @@
 
 **Dev:**
 
+- Dev: Add Guard-Rubocop ([maximeg](https://github.com/maximeg))
 - Quality: Add Rubocop-RSpec ([maximeg](https://github.com/maximeg))
 - Quality: Update Rubocop to 0.63 ([maximeg](https://github.com/maximeg))
 
