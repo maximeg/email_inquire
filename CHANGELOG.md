@@ -5,6 +5,7 @@
 
 **Dev:**
 
+- Spec: Update RSpec to 3.9 ([maximeg](https://github.com/maximeg))
 - Update Ruby versions for CI (and add 2.7.0) ([maximeg](https://github.com/maximeg))
 - Update Ruby version from 2.6.0 to 2.6.1 ([maximeg](https://github.com/maximeg))
 - Dev: Add Guard-Rubocop ([maximeg](https://github.com/maximeg))
