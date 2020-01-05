@@ -13,7 +13,7 @@ end
 require "bundler/setup"
 require "email_inquire"
 
-Dir["#{__dir__}/support/**/*.rb"].each { |f| require f }
+Dir["#{__dir__}/support/**/*.rb"].sort.each { |f| require f }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

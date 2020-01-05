@@ -1,3 +1,5 @@
+require: rubocop-performance
+
 inherit_mode:
   merge:
     - Include
@@ -13,14 +15,6 @@ Layout/AccessModifierIndentation:
   SupportedStyles:
     - outdent
     - indent
-
-Layout/AlignHash:
-  EnforcedHashRocketStyle: key
-  EnforcedColonStyle: key
-  EnforcedLastArgumentHashStyle: always_inspect
-
-Layout/AlignParameters:
-  EnforcedStyle: with_fixed_indentation
 
 Layout/ClassStructure:
   Enabled: true
@@ -50,8 +44,14 @@ Layout/EndAlignment:
 Layout/ExtraSpacing:
   AllowForAlignment: false
 
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
 Layout/FirstArrayElementLineBreak:
   Enabled: true # default: false
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
 
 Layout/FirstHashElementLineBreak:
   Enabled: true # default: false
@@ -62,11 +62,15 @@ Layout/FirstMethodArgumentLineBreak:
 Layout/FirstParameterIndentation:
   EnforcedStyle: consistent
 
-Layout/IndentArray:
-  EnforcedStyle: consistent
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: key
+  EnforcedColonStyle: key
+  EnforcedLastArgumentHashStyle: always_inspect
 
-Layout/IndentHash:
-  EnforcedStyle: consistent
+Layout/LineLength:
+  Max: 100 # default: 80
+  IgnoredPatterns:
+    - "^ *#" # comments
 
 Layout/MultilineAssignmentLayout:
   Enabled: true # default: false
@@ -77,6 +81,9 @@ Layout/MultilineMethodCallIndentation:
 
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
 
 Layout/SpaceAroundOperators:
   AllowForAlignment: false
@@ -99,11 +106,6 @@ Metrics/ClassLength:
 
 Metrics/CyclomaticComplexity:
   Max: 10 # default: 6
-
-Metrics/LineLength:
-  Max: 100 # default: 80
-  IgnoredPatterns:
-    - "^ *#" # comments
 
 Metrics/MethodLength:
   Max: 12 # default: 10
