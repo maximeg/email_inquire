@@ -23,6 +23,7 @@ live.com
 live.fr
 me.com
 msn.com
+my.com
 neuf.fr
 ntlworld.com
 numericable.fr
