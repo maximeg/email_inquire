@@ -3,6 +3,10 @@
 ## [Unreleased]
 [Full Changelog](https://github.com/maximeg/email_inquire/compare/v0.10.0...master)
 
+**Changed:**
+
+- Data: Update one-time providers list to 4700 domains ([maximeg](https://github.com/maximeg))
+
 **Dev:**
 
 - Spec: Add a spec to validate data files ([maximeg](https://github.com/maximeg))
@@ -38,7 +42,7 @@
 
 **Changed:**
 
-- Update one-time providers list to 3981 domains ([maximeg](https://github.com/maximeg))
+- Data: Update one-time providers list to 3981 domains ([maximeg](https://github.com/maximeg))
 
 **Dev:**
 
@@ -57,7 +61,7 @@
 **Changed:**
 
 - Update minimum Ruby version to 2.3.0 ([maximeg](https://github.com/maximeg))
-- Update one-time providers list to 3764 domains ([maximeg](https://github.com/maximeg))
+- Data: Update one-time providers list to 3764 domains ([maximeg](https://github.com/maximeg))
 
 **Dev:**
 
@@ -73,7 +77,7 @@
 
 **Changed:**
 
-- Update one-time providers list to 3030 domains ([maximeg](https://github.com/maximeg))
+- Data: Update one-time providers list to 3030 domains ([maximeg](https://github.com/maximeg))
 
 **Dev:**
 

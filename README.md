@@ -80,7 +80,7 @@ Providers with an unique domain:
 
 ### Burners
 
-3981 one-time email providers a.k.a. burners, or disposable email
+4700 one-time email providers a.k.a. burners, or disposable email
 ([source](https://github.com/wesbos/burner-email-providers)):
 
 - `yopmail.com` => invalid
