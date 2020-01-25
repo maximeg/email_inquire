@@ -5,6 +5,7 @@
 
 **Dev:**
 
+- Spec: Add a spec to validate data files ([maximeg](https://github.com/maximeg))
 - Quality: Update Rubocop to 0.78 and add rubocop-performance ([maximeg](https://github.com/maximeg))
 - Spec: Update RSpec to 3.9 ([maximeg](https://github.com/maximeg))
 - Update Ruby versions for CI (and add 2.7.0) ([maximeg](https://github.com/maximeg))
