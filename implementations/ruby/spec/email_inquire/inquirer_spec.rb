@@ -51,6 +51,7 @@ RSpec.describe EmailInquire::Inquirer do
       })
     end
 
+    end
     context "with a valid email containing upcase chars" do
       let(:email) { "John.Doe@Domain.Com" }
 
@@ -62,7 +63,6 @@ RSpec.describe EmailInquire::Inquirer do
 
         expect(validator).to have_received(:validate).with("john.doe@domain.com")
       end
-    end
 
     context "with a nil email" do
       let(:email) { nil }
