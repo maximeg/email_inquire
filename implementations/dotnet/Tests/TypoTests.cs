@@ -60,6 +60,7 @@ namespace EmailInquire.Tests
         [InlineData("john.doe@gmaul.com")]
         [InlineData("john.doe@gmil.com")]
         [InlineData("john.doe@gmsil.com")]
+        [InlineData("john.doe@gmail.co.za")]
         [InlineData("john.doe@gmzil.com")]
         [InlineData("john.doe@gnail.com")]
         [InlineData("john.doe@google.fr")]

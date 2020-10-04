@@ -3,13 +3,13 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <AssemblyName>EmailInquire</AssemblyName>
-        <RootNamespace>EmailnugInquire</RootNamespace>
+        <RootNamespace>EmailInquire</RootNamespace>
         <Authors>janpieterz</Authors>
         <Description>Validate email for common typos and one-time email providers</Description>
         <PackageId>EmailInquire</PackageId>
         <PackageTags>Email;Validation;Typo;Providers</PackageTags>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Version>1.0.0-beta1</Version>
+        <Version>1.0.0-beta2</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
@@ -35,10 +35,6 @@
       <None Update="Data\country_code_tld\uk.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Validators\ResponseStatus.cs" />
     </ItemGroup>
 
 </Project>
