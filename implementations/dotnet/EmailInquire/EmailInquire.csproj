@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <AssemblyName>EmailInquire</AssemblyName>
+        <RootNamespace>EmailInquire</RootNamespace>
+        <Authors>janpieterz</Authors>
+        <Description>Validate email for common typos and one-time email providers</Description>
+        <PackageId>EmailInquire</PackageId>
+        <PackageTags>Email;Validation;Typo;Providers</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Version>1.0.0-beta10</Version>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="EmailInquireData\**\*.txt">
+            <PackageCopyToOutput>true</PackageCopyToOutput>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+</Project>
