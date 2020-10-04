@@ -9,7 +9,7 @@ namespace EmailInquire.Validators
     {
         public override Response Validate()
         {
-            return KnownInvalidDomains?.Contains(Domain) ?? false ? Response.Invalid(Email) : Response.Undefined;
+            return KnownInvalidDomains?.Value.Contains(Domain) ?? false ? Response.Invalid(Email) : Response.Undefined;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace EmailInquire.Validators
     {
         public override Response Validate()
         {
-            return OneTimeProviders?.Contains(Domain) ?? false ? Response.Invalid(Email) : Response.Undefined;
+            return OneTimeProviders?.Value.Contains(Domain) ?? false ? Response.Invalid(Email) : Response.Undefined;
         }
     }
 }

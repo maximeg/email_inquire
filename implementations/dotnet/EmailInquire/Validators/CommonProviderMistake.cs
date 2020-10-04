@@ -9,8 +9,8 @@ namespace EmailInquire.Validators
     {
         public override Response Validate()
         {
-            if (CommonDomains.Contains(Domain)) return Response.Undefined;
-            var match = CommonDomains.FirstOrDefault(d => Distance(d, Domain) == 1);
+            if (CommonDomains.Value.Contains(Domain)) return Response.Undefined;
+            var match = CommonDomains.Value.FirstOrDefault(d => Distance(d, Domain) == 1);
             return match != null ? Response.Hint(Name, match) : Response.Undefined;
         }
     }

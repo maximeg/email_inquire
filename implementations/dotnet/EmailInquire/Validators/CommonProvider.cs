@@ -9,7 +9,7 @@ namespace EmailInquire.Validators
     {
         public override Response Validate()
         {
-            return CommonDomains?.Contains(Domain) ?? false ? Response.Valid(Email) : Response.Undefined;
+            return CommonDomains?.Value.Contains(Domain) ?? false ? Response.Valid(Email) : Response.Undefined;
         }
     }
 }

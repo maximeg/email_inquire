@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,7 +12,6 @@ namespace EmailInquire.Validators
     /// </summary>
     public abstract class ValidatorBase
     {
-        private const string DataLocation = "./Data";
         private const string TldLocation = "country_code_tld";
 
         protected static readonly IEnumerable<CountryCodeData> CountryCodeTLDs = new[]
@@ -70,26 +70,26 @@ namespace EmailInquire.Validators
         /// <summary>
         ///     Uploaded list of Common Providers
         /// </summary>
-        protected static IEnumerable<string> CommonDomains { get; } =
-            LoadData(Path.Combine(DataLocation, "common_providers.txt"));
+        protected static Lazy<IEnumerable<string>> CommonDomains { get; } = new Lazy<IEnumerable<string>>(
+            LoadData(Path.Combine(EmailInquirer.DataLocation, "common_providers.txt")));
 
         /// <summary>
         ///     Uploaded list of Known Invalid Domains
         /// </summary>
-        protected static IEnumerable<string> KnownInvalidDomains { get; } =
-            LoadData(Path.Combine(DataLocation, "known_invalid_domains.txt"));
+        protected static Lazy<IEnumerable<string>> KnownInvalidDomains { get; } =
+            new Lazy<IEnumerable<string>>(LoadData(Path.Combine(EmailInquirer.DataLocation, "known_invalid_domains.txt")));
 
         /// <summary>
         ///     Uploaded list of One-Time Providers
         /// </summary>
-        protected static IEnumerable<string> OneTimeProviders { get; } =
-            LoadData(Path.Combine(DataLocation, "one_time_providers.txt"));
+        protected static Lazy<IEnumerable<string>> OneTimeProviders { get; } =
+            new Lazy<IEnumerable<string>>(LoadData(Path.Combine(EmailInquirer.DataLocation, "one_time_providers.txt")));
 
         /// <summary>
         /// Uploaded list of Unique domain Providers
         /// </summary>
-        protected static IEnumerable<string> UniqueDomainProviders { get; } =
-            LoadData(Path.Combine(DataLocation, "unique_domain_providers.txt"));
+        protected static Lazy<IEnumerable<string>> UniqueDomainProviders { get; } = new Lazy<IEnumerable<string>>(
+            LoadData(Path.Combine(EmailInquirer.DataLocation, "unique_domain_providers.txt")));
 
         /// <summary>
         ///     Sets the list of custom valid domains
@@ -110,13 +110,18 @@ namespace EmailInquire.Validators
         }
 
         /// <summary>
-        ///     Easily oad data from text files
+        ///     Easily load data from text files
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
         private static IEnumerable<string> LoadData(string fileName)
         {
-            return !File.Exists(fileName) ? new string[0] : File.ReadAllLines(fileName).Where(l => !l.StartsWith('#'));
+            if (!File.Exists(fileName))
+            {
+                throw new Exception($"Email Inquire Data file {fileName} doesn't exist");
+            }
+
+            return File.ReadAllLines(fileName).Where(l => !l.StartsWith('#'));
         }
 
         /// <summary>
@@ -168,13 +173,13 @@ namespace EmailInquire.Validators
                 CCTLD = tld;
                 GenericCom = genericCom;
                 RegTldOnly = regTldOnly;
-                Generics = LoadData(Path.Combine(DataLocation, TldLocation, $"{tld}.txt"));
+                Generics = new Lazy<IEnumerable<string>>(LoadData(Path.Combine(EmailInquirer.DataLocation, TldLocation, $"{tld}.txt")));
             }
 
             // ReSharper disable once IdentifierTypo
             private string CCTLD { get; }
             private string GenericCom { get; }
-            private IEnumerable<string> Generics { get; }
+            private Lazy<IEnumerable<string>> Generics { get; }
             private bool RegTldOnly { get; }
 
             public Response Validate(string name, string domain)
@@ -188,20 +193,20 @@ namespace EmailInquire.Validators
                 string generic;
                 if (!tld.Equals(CCTLD))
                 {
-                    generic = Generics.FirstOrDefault(g => tld.Equals($"{g}{CCTLD}"));
+                    generic = Generics.Value.FirstOrDefault(g => tld.Equals($"{g}{CCTLD}"));
                     return string.IsNullOrEmpty(generic)
                         ? Response.Undefined
                         : Response.Hint(name, $"{rest}.{sld}.{generic}.{CCTLD}");
                 }
 
-                if (Generics.Contains(sld))
+                if (Generics.Value.Contains(sld))
                     return string.IsNullOrEmpty(rest) ? Response.Invalid($"{name}@{domain}") : Response.Undefined;
 
-                generic = Generics.FirstOrDefault(g => sld.EndsWith(g));
+                generic = Generics.Value.FirstOrDefault(g => sld.EndsWith(g));
                 if (!string.IsNullOrEmpty(generic))
                     return Response.Hint(name, JoinNotNull('.', rest, sld.Replace(generic, ""), generic, CCTLD));
                 var commonProvider = JoinNotNull('.', sld, GenericCom, CCTLD);
-                if (CommonDomains.Contains(commonProvider))
+                if (CommonDomains.Value.Contains(commonProvider))
                     return Response.Hint(name, commonProvider);
                 if (sld.Length < 3 || !RegTldOnly)
                     return Response.Hint(name, JoinNotNull('.', rest, sld.Length > 2 ? sld : null, GenericCom, CCTLD));

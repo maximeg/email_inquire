@@ -1,3 +1,5 @@
+using System.IO;
+using System.Reflection;
 using Xunit;
 
 namespace EmailInquire.Tests
@@ -59,7 +61,17 @@ namespace EmailInquire.Tests
             var result = inquirer.Validate("john.doe@example.ca");
             Assert.True(result.IsValid);
         }
-        
+        [Fact]
+        public void SetBasePath()
+        {
+            Directory.SetCurrentDirectory("C:\\");
+            
+            var inquirer = new EmailInquirer();
+            
+            inquirer.SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            var result = inquirer.Validate("john.doe@example.ca");
+            Assert.True(result.IsValid);
+        }
        
     }
 }
