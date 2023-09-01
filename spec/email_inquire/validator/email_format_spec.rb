@@ -84,6 +84,15 @@ RSpec.describe EmailInquire::Validator::EmailFormat do
         expect(described_class.validate("john.doe%test@domain.com")).to eq(nil)
       end
 
+      it "returns nil for a name starting with a capital letter" do
+        expect(described_class.validate("John.doe@domain.com")).to eq(nil)
+      end
+
+      it "returns an invalid response for a name starting with a non-alphanumeric character" do
+        expect(described_class.validate("+john.doe@domain.com")).to be_a(EmailInquire::Response)
+          .and be_invalid
+      end
+
       it "returns an invalid response for a name containing non ascii char" do
         expect(described_class.validate("john.dôe@domain.com")).to be_a(EmailInquire::Response)
           .and be_invalid
