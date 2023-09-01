@@ -24,14 +24,14 @@ module EmailInquire
         \z
       /x.freeze
 
-      NAME_ALLOWED_CHARS = /[a-z0-9._%+-]/.freeze
+      NAME_ALLOWED_CHARS = "a-z0-9._%+-".freeze
 
       NAME_REGEXP = /
         \A
         [a-z0-9]
         [#{NAME_ALLOWED_CHARS}]{0,63}
         \z
-      /x.freeze
+      /ix.freeze
 
       # Relevant literature:
       # http://emailregex.com/email-validation-summary/
